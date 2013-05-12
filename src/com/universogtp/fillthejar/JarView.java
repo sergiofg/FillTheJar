@@ -12,15 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class JarView extends LinearLayout implements OnClickListener {
+public class JarView extends LinearLayout implements OnClickListener 
+{
 	TextView counter;
 	Button button;
 	JarRules rules;
 	
-	public JarView(Context context, AttributeSet attrs) {
+	public JarView(Context context, AttributeSet attrs) 
+	{
 		super(context);
 		
-		rules = new JarRules();
+		rules = new JarRules(context);
 		
 		setOrientation(LinearLayout.VERTICAL);
 	    setGravity(Gravity.CENTER_HORIZONTAL);
@@ -37,7 +39,8 @@ public class JarView extends LinearLayout implements OnClickListener {
 	}
 
 	@Override
-	public void onClick(View v) {
+	public void onClick(View v) 
+	{
 		counter.setText(String.valueOf(rules.fillJar()));
 	}
 
