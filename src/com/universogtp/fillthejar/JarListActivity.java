@@ -13,6 +13,8 @@ public class JarListActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    
+	    setTitle(R.string.jar_list);
+	    
 	    jarList = new JarList();
 	    
 	    Jar jar1 = new Jar(1, "Jarra 1");
