@@ -2,6 +2,7 @@ package com.universogtp.fillthejar;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 
 public class JarActivity extends Activity {
@@ -10,6 +11,11 @@ public class JarActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+	    Intent intent = getIntent();
+	    Jar jar = (Jar)intent.getSerializableExtra("jarObject");
+	    
+	    setTitle(jar.getName());
 	}
 
 	@Override

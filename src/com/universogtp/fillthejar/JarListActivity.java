@@ -7,16 +7,16 @@ import android.view.View;
 import android.widget.ListView;
 
 public class JarListActivity extends ListActivity {
+	private JarList jarList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	
-	    Jar jar1 = new Jar();
-	    Jar jar2 = new Jar();
 	    
-	    JarList jarList = new JarList();
+	    jarList = new JarList();
 	    
+	    Jar jar1 = new Jar(1, "Jarra 1");
+	    Jar jar2 = new Jar(2, "Jarra 2");	    
 	    jarList.addJar(jar1);
 	    jarList.addJar(jar2);
 	    
@@ -26,10 +26,11 @@ public class JarListActivity extends ListActivity {
 	/** {@inheritDoc} */
 	@Override  
 	protected void onListItemClick(ListView l, View v, int pos, long id) {  
-	    super.onListItemClick(l, v, pos, id);
+	    super.onListItemClick(l, v, pos, id);  
 	    
-	    Intent myIntent = new Intent(this, JarActivity.class);
-        startActivityForResult(myIntent, pos);
+	    Intent intent = new Intent(this, JarActivity.class);
+	    intent.putExtra("jarObject", jarList.getJar(pos));
+        startActivityForResult(intent, 0);
 	}  	
 
 }
