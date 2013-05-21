@@ -14,13 +14,16 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.universogtp.fillthejar.MainActivity"
+            android:name="com.universogtp.fillthejar.JarActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity android:name="JarListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>            
         </activity>
     </application>
 

@@ -4,5 +4,6 @@
     <string name="app_name">FillTheJar</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="untitled">Sin título</string>
 
 </resources>

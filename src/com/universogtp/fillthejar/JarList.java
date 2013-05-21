@@ -20,4 +20,9 @@ public class JarList {
 	public Jar getJar (int position) {
 		return jarArray.get(position);
 	}
+	
+	public Jar[] toArray() {
+		Jar[] jars = jarArray.toArray(new Jar[jarArray.size()]);
+		return jars;
+	}
 }
