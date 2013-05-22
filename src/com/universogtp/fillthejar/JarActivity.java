@@ -10,7 +10,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 
-
 public class JarActivity extends Activity implements OnClickListener {
 	TextView counter;
 	Button button;

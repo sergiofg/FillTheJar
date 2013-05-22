@@ -7,6 +7,11 @@ public class Jar  implements Serializable {
 	private long iD;
 	private String name;
 	private int value;
+	private int frecuency;
+	private boolean weekends;
+	private int fillsPerCycle;
+	private int lastFill;
+	private int streak;
 
 	public Jar(long iD, String name) {
 		this.iD = iD;
@@ -38,8 +43,54 @@ public class Jar  implements Serializable {
 		this.value=value;
 	}
 	
+	public int getFrecuency() {
+		return frecuency;
+	}
+
+	public void setFrecuency(int frecuency) {
+		this.frecuency = frecuency;
+	}
+	
+	public boolean isWeekends() {
+		return weekends;
+	}
+
+	public void setWeekends(boolean weekends) {
+		this.weekends = weekends;
+	}
+	
+	public int getFillsPerCycle() {
+		return fillsPerCycle;
+	}
+
+	public void setFillsPerCycle(int fillsPerCycle) {
+		this.fillsPerCycle = fillsPerCycle;
+	}
+
+	public int getLastFill() {
+		return lastFill;
+	}
+
+	public void setLastFill(int lastFill) {
+		this.lastFill = lastFill;
+	}
+
+	public int getStreak() {
+		return streak;
+	}
+
+	public void setStreak(int streak) {
+		this.streak = streak;
+	}
+
 	public int fill() {
+		// TODO calcular si debe rellenarse o no		
 		value++;
 		return value;
-	}	
+	}
+	
+	public boolean refresh() {
+		// TODO calcular si el tarro debe vaciarse y actualiza en consecuencia (devolver true si el tarro cambia y debe ser guardado en persistencia)  
+		return false;
+	}
 }
