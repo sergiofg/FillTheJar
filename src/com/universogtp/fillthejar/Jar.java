@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Jar  implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int iD;
+	private long iD;
 	private String name;
 	private int value;
 
-	public Jar(int iD, String name) {
+	public Jar(long iD, String name) {
 		this.iD = iD;
 		this.name = name;
 		this.value=0;
@@ -18,7 +18,7 @@ public class Jar  implements Serializable {
 		return value;
 	}
 	
-	public int getID() {
+	public long getID() {
 		return iD;
 	}
 	
@@ -30,7 +30,7 @@ public class Jar  implements Serializable {
 		return value;
 	}
 	
-	public void setID(int iD){
+	public void setID(long iD){
 		this.iD=iD;
 	}
 	

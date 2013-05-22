@@ -48,12 +48,15 @@ public class JarNewActivity extends Activity {
             startActivity(intent);			
 			return true;
 		case 1:
-			Jar jar = new Jar(0, jarNameEditText.getText().toString());
-			JarPersistence jarPersistence = new JarPersistence(this);
-			//jarPersistence.newJar(jar);
-			jarPersistence.newJar(0, jarNameEditText.getText().toString());
-			
-			Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
+			try {
+				JarPersistence jarPersistence = new JarPersistence(this);
+				Jar jar = new Jar(0, jarNameEditText.getText().toString());
+				jarPersistence.newJar(jar);
+				jarPersistence.cleanup();
+				Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 			intent = new Intent(this, JarListActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

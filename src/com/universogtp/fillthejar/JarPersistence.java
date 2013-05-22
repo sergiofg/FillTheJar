@@ -8,21 +8,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class JarPersistence {
 	public static final String ID_ROW = "_id";
-	public static final String REASON = "razon";
-	public static final String VALUE = "valor";
+	public static final String REASON = "name";
+	public static final String VALUE = "value";
 
 	
-	private static final String N_BD = "motivador";
-	private static final String N_TABLE = "Table_jar";
-	private static final int VERSION_BD =2; 
+	private static final String N_DB = "fill_the_jar";
+	private static final String N_TABLE = "jar";
+	private static final int VERSION_DB =3; 
 	
-	private BDHelper nHelper;
-	private final Context nContext;
-	private SQLiteDatabase nBD;
+	private DBHelper dbHelper;
+	private final Context context;
+	private SQLiteDatabase db;
 	
-	private static class BDHelper extends SQLiteOpenHelper {
-		public BDHelper(Context context) {
-			super(context, N_BD, null, VERSION_BD);
+	private static class DBHelper extends SQLiteOpenHelper {
+		public DBHelper(Context context) {
+			super(context, N_DB, null, VERSION_DB);
 		}
 
 		public void onCreate(SQLiteDatabase db) {
@@ -40,75 +40,68 @@ public class JarPersistence {
 
 	}
 	
-	public JarPersistence (Context c) {
-		nContext=c;
+	public JarPersistence (Context context) throws Exception {
+		this.context=context;
+		dbHelper = new DBHelper(this.context);
+		openDb();
 	}
 	
-	private JarPersistence opendb() throws Exception {
-		nHelper = new BDHelper(nContext);
-		nBD = nHelper.getWritableDatabase();
-		return this;
-	}
-	
-	private void closedb() {
-		nHelper.close();
-	}
-	
-	public long newJar(int val,String j) {
-		ContentValues cv = new ContentValues();
-		cv.put("REASON",j);
-		cv.put("VALUE",val);
-		
-		return nBD.insert(N_TABLE, null, cv);
-	}
-	
-	public long updateJar(int val,String j){
-		ContentValues cv = new ContentValues();
-		cv.put(VALUE, val);
-
-		return nBD.update(N_TABLE, cv, REASON+"='"+j+"'", null);
-
-	}
-	
-	public void deleteJar(String j){
-		nBD.delete(N_TABLE, REASON+"='"+j+"'",null);
-	}
-	
-	private String getDb(String j) {
-		String[]columns = new String[]{ID_ROW,VALUE};
-
-		Cursor c = nBD.query(N_TABLE, columns, REASON+" ='"+j+"'",null, null, null, null);
-		
-		if (c.moveToFirst()) { 
-		c.moveToLast();
-		 String v = c.getString(1).toString();
-		return v;
-		}else{
-			return  "empty" ;
+	private void openDb() throws Exception {
+		if (db == null) {
+			db = dbHelper.getWritableDatabase();
 		}
 	}
 	
-	public void setValue(int val,String j) {
-		JarPersistence db = new JarPersistence (nContext);
-		try {
-			db.opendb();
-		} catch (Exception e) {
-			e.printStackTrace();
+	public void cleanup() {
+		if (db != null) {
+			db.close();
+			db= null;
 		}
-		db.updateJar(val,j);
-		db.closedb();
 	}
 	
-	public int getValue(String j) {
-		JarPersistence db = new JarPersistence(nContext);
-		try {
-			db.opendb();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		String data = db.getDb(j);
-		db.closedb();
+	public void newJar(Jar jar) {
+		ContentValues values = new ContentValues();
+		values.put(REASON,jar.getName());
+		values.put(VALUE,jar.getValue());
 		
-		return  Integer.parseInt(data);
+		long id = db.insert(N_TABLE, null, values);
+		jar.setID(id);
+	}
+	
+	public void updateJar(Jar jar){
+		ContentValues values = new ContentValues();
+		values.put(REASON,jar.getName());
+		values.put(VALUE,jar.getValue());
+
+		db.update(N_TABLE, values, ID_ROW+"='"+jar.getID()+"'", null);
+	}
+	
+	public void deleteJar(Jar jar){
+		db.delete(N_TABLE, ID_ROW+"='"+jar.getID()+"'",null);
+	}
+	
+	public JarList getJarList()  throws Exception {
+		JarList jarList = new JarList();
+		
+		String[] columns = new String[]{ID_ROW, REASON, VALUE};
+		Cursor cursor = null;
+		cursor = db.query(N_TABLE, columns, null, null, null, null, null);
+		int numRows = cursor.getCount();
+		cursor.moveToFirst();
+		
+		for (int i = 0; i < numRows; ++i) {
+			long id = cursor.getLong(0);
+			String reason = cursor.getString(1);
+			int value = cursor.getInt(2);
+			
+			Jar jar = new Jar(id, reason);
+			jar.setValue(value);
+			
+			jarList.addJar(jar);
+			
+			cursor.moveToNext();
+		}
+		
+		return jarList;
 	}
 }

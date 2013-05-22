@@ -17,12 +17,14 @@ public class JarListActivity extends ListActivity {
 	    
 	    setTitle(R.string.jar_list);
 	    
-	    jarList = new JarList();
-	    
-	    Jar jar1 = new Jar(1, "Jarra 1");
-	    Jar jar2 = new Jar(2, "Jarra 2");	    
-	    jarList.addJar(jar1);
-	    jarList.addJar(jar2);
+	    try {
+			JarPersistence jarPersistance = new JarPersistence(this);
+			jarList = jarPersistance.getJarList();
+			jarPersistance.cleanup();
+		} catch (Exception e) {
+			e.printStackTrace();
+			jarList = new JarList();
+		}
 	    
 	    setListAdapter(new JarListAdapter(this,jarList));
 	}

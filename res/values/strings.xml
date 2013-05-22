@@ -7,5 +7,6 @@
     <string name="jar_list">Lista de tarros</string>
     <string name="name">Nombre</string>
     <string name="saved">guardado</string>
+    <string name="fill">+</string>
 
 </resources>
