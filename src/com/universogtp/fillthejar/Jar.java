@@ -13,10 +13,6 @@ public class Jar  implements Serializable {
 		this.name = name;
 		this.value=0;
 	}
-	public int fillJar() {
-		value++;
-		return value;
-	}
 	
 	public long getID() {
 		return iD;
@@ -41,4 +37,9 @@ public class Jar  implements Serializable {
 	public void setValue(int value){
 		this.value=value;
 	}
+	
+	public int fill() {
+		value++;
+		return value;
+	}	
 }

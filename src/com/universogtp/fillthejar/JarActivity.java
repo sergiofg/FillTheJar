@@ -56,7 +56,7 @@ public class JarActivity extends Activity implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-		jar.fillJar();
+		jar.fill();
 		if (jarPersistence != null) {
 			jarPersistence.updateJar(jar);
 		}
