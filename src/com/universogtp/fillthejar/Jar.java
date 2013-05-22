@@ -6,6 +6,7 @@ public class Jar  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private long iD;
 	private String name;
+	private int created;
 	private int value;
 	private int frecuency;
 	private boolean weekends;
@@ -31,6 +32,14 @@ public class Jar  implements Serializable {
 	public String getName() {
 		return name;
 	}
+	
+	public int getCreated() {
+		return created;
+	}
+
+	public void setCreated(int created) {
+		this.created = created;
+	}	
 	
 	public void setName(String name){
 		this.name=name;
