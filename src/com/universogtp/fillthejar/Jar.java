@@ -10,6 +10,7 @@ public class Jar  implements Serializable {
 	private int frecuency;
 	private boolean weekends;
 	private int fillsPerCycle;
+	private int fillsThisCycle;
 	private int lastFill;
 	private int streak;
 
@@ -23,20 +24,20 @@ public class Jar  implements Serializable {
 		return iD;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
-	public int getValue(){
-		return value;
-	}
-	
 	public void setID(long iD){
 		this.iD=iD;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public void setName(String name){
 		this.name=name;
+	}	
+	
+	public int getValue(){
+		return value;
 	}
 	
 	public void setValue(int value){
@@ -66,7 +67,15 @@ public class Jar  implements Serializable {
 	public void setFillsPerCycle(int fillsPerCycle) {
 		this.fillsPerCycle = fillsPerCycle;
 	}
+	
+	public int getFillsThisCycle() {
+		return fillsThisCycle;
+	}
 
+	public void setFillsThisCycle(int fillsThisCycle) {
+		this.fillsThisCycle = fillsThisCycle;
+	}
+	
 	public int getLastFill() {
 		return lastFill;
 	}
