@@ -16,13 +16,15 @@ public class JarRules {
 	}
 
 	public int getCounter() {
-		return persistence.getValue();
+		//return persistence.getValue();
+		return 0;
 	}
 
 	public int fillJar() {
-		int counter=persistence.getValue();
+		//int counter=persistence.getValue();
+		int counter=0;
 		counter++;
-		persistence.setValue(counter);
+		//persistence.setValue(counter);
 		return counter;
 	}	
 }

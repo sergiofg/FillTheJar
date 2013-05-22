@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="11"
         android:targetSdkVersion="17" />
 
     <application
@@ -13,10 +13,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.universogtp.fillthejar.JarActivity"
-            android:label="@string/app_name" >
-        </activity>
+        
         <activity android:name="JarListActivity"
             android:label="@string/app_name" >
             <intent-filter>
@@ -24,7 +21,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>            
+        </activity><activity android:name="com.universogtp.fillthejar.JarActivity" android:label="@string/app_name">
         </activity>
+        <activity android:name="JarNewActivity"></activity>
     </application>
 
 </manifest>

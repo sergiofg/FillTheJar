@@ -5,5 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="untitled">Sin título</string>
     <string name="jar_list">Lista de tarros</string>
+    <string name="name">Nombre</string>
+    <string name="saved">guardado</string>
 
 </resources>

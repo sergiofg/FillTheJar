@@ -8,11 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class JarPersistence {
 	public static final String ID_ROW = "_id";
+	public static final String REASON = "razon";
 	public static final String VALUE = "valor";
+
 	
 	private static final String N_BD = "motivador";
-	private static final String N_TABLE = "Table_motivador";
-	private static final int VERSION_BD =1; 
+	private static final String N_TABLE = "Table_jar";
+	private static final int VERSION_BD =2; 
 	
 	private BDHelper nHelper;
 	private final Context nContext;
@@ -26,6 +28,7 @@ public class JarPersistence {
 		public void onCreate(SQLiteDatabase db) {
 			db.execSQL("CREATE TABLE "+N_TABLE+ "("
 					+ ID_ROW+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ REASON+" TEXT NOT NULL, "
 					+VALUE+" INTEGER NOT NULL);");
 		}
 
@@ -51,49 +54,61 @@ public class JarPersistence {
 		nHelper.close();
 	}
 	
-	private long dataInput(int val) {
+	public long newJar(int val,String j) {
 		ContentValues cv = new ContentValues();
-		cv.put(VALUE, val);
+		cv.put("REASON",j);
+		cv.put("VALUE",val);
 		
 		return nBD.insert(N_TABLE, null, cv);
 	}
 	
-	private int getDb() {
-		String[]columns = new String[]{ID_ROW,VALUE};
-		Cursor c = nBD.query(N_TABLE, columns, null,null, null, null, null);
-		int result =0;
-		
-		int iValue = c.getColumnIndex(VALUE);
-		
-		if (c.moveToFirst()) {
-			c.moveToLast();
-			result =c.getInt(iValue);
-		}
-		
-		return result;
+	public long updateJar(int val,String j){
+		ContentValues cv = new ContentValues();
+		cv.put(VALUE, val);
+
+		return nBD.update(N_TABLE, cv, REASON+"='"+j+"'", null);
+
 	}
 	
-	public void setValue(int val) {
+	public void deleteJar(String j){
+		nBD.delete(N_TABLE, REASON+"='"+j+"'",null);
+	}
+	
+	private String getDb(String j) {
+		String[]columns = new String[]{ID_ROW,VALUE};
+
+		Cursor c = nBD.query(N_TABLE, columns, REASON+" ='"+j+"'",null, null, null, null);
+		
+		if (c.moveToFirst()) { 
+		c.moveToLast();
+		 String v = c.getString(1).toString();
+		return v;
+		}else{
+			return  "empty" ;
+		}
+	}
+	
+	public void setValue(int val,String j) {
 		JarPersistence db = new JarPersistence (nContext);
 		try {
 			db.opendb();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		db.dataInput(val);
+		db.updateJar(val,j);
 		db.closedb();
 	}
 	
-	public int getValue() {
+	public int getValue(String j) {
 		JarPersistence db = new JarPersistence(nContext);
 		try {
 			db.opendb();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		int data = db.getDb();
+		String data = db.getDb(j);
 		db.closedb();
 		
-		return  data;
+		return  Integer.parseInt(data);
 	}
 }
