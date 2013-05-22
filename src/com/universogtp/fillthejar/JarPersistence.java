@@ -14,7 +14,7 @@ public class JarPersistence {
 	
 	private static final String N_DB = "fill_the_jar";
 	private static final String N_TABLE = "jar";
-	private static final int VERSION_DB =3; 
+	private static final int VERSION_DB =4; 
 	
 	private DBHelper dbHelper;
 	private final Context context;
