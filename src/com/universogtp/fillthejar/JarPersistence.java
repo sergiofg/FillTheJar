@@ -23,6 +23,9 @@ public class JarPersistence {
 	private static final String N_TABLE = "jar";
 	private static final int VERSION_DB =4; 
 	
+	private long date = System.currentTimeMillis();
+	private int today = (int)date;
+	
 	private DBHelper dbHelper;
 	private final Context context;
 	private SQLiteDatabase db;
@@ -75,8 +78,10 @@ public class JarPersistence {
 	
 	public void newJar(Jar jar) {
 		ContentValues values = new ContentValues();
+
 		values.put(NAME,jar.getName());
 		values.put(VALUE,jar.getValue());
+		values.put(CREATED, today);
 		
 		long id = db.insert(N_TABLE, null, values);
 		jar.setID(id);
@@ -84,8 +89,10 @@ public class JarPersistence {
 	
 	public void updateJar(Jar jar){
 		ContentValues values = new ContentValues();
+
 		values.put(NAME,jar.getName());
 		values.put(VALUE,jar.getValue());
+		values.put(LASTFILL, today);
 
 		db.update(N_TABLE, values, ID_ROW+"='"+jar.getID()+"'", null);
 	}
