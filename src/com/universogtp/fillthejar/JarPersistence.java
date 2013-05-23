@@ -36,8 +36,14 @@ public class JarPersistence {
 			db.execSQL("CREATE TABLE "+N_TABLE+ "("
 					+ ID_ROW+" INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ NAME+" TEXT NOT NULL, "
+					+ VALUE+ " INTEGER NOT NULL, "
 					+ CREATED+" INTEGER, "
-					+VALUE+" INTEGER NOT NULL);");
+					+ FRECUENCY+" INTEGER ,"
+					+ WEEKENDS +" INTEGER, " // VALUE 0 = FALSE, 1 = TRUE
+					+ FILLPERCYCLE+" INTEGER, "
+					+ FILLTHISCYCLE+" INTEGER, "
+					+ LASTFILL+" INTEGER, "
+					+ STREAK+" INTEGER);");
 		}
 
 		@Override
