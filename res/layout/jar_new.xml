@@ -3,7 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+	<TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tarea/motivacion"
+	    />
     <EditText
         android:id="@+id/jarNameEditText"
         android:layout_width="match_parent"
@@ -12,5 +16,18 @@
         android:hint="@string/name">
         <requestFocus />
     </EditText>
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Frecuencia"
+	    />
+    <Spinner
+        android:id="@+id/SFrecuency"
+    	android:layout_width="fill_parent"
+   		android:layout_height="wrap_content"
+   		android:entries="@array/SFrecuency"
+   		android:prompt="@string/frecuency_prompt"
+   		android:drawSelectorOnTop="True"
+        />
 
 </LinearLayout>
