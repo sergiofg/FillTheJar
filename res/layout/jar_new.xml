@@ -29,5 +29,23 @@
    		android:prompt="@string/frecuency_prompt"
    		android:drawSelectorOnTop="True"
         />
-
+	 <CheckBox 
+         android:id="@+id/Check_weekend"
+         android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:text="Fines de semana"
+    	android:checked="false"
+         />
+	 <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Veces a rellenar por frecuencia"
+	    />
+	 <Spinner
+        android:id="@+id/SpStreak"
+    	android:layout_width="fill_parent"
+   		android:layout_height="wrap_content"
+   		android:entries="@array/SpStreak"
+   		android:drawSelectorOnTop="True"
+        />
 </LinearLayout>

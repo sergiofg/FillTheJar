@@ -5,5 +5,13 @@
         <item>diariamente</item>
         <item>semanalmente</item>
         <item>quincenalmente</item>
-           </string-array>
+    </string-array>
+    <string-array name="SpStreak">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>infinito</item>
+    </string-array>
 </resources>
