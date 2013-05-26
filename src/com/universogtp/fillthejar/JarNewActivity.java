@@ -6,12 +6,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class JarNewActivity extends Activity {
 	private EditText jarNameEditText;
-
+	private CheckBox checkbox;
+	private Spinner spinner;
+	private String selectionFrecuency;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -20,9 +28,37 @@ public class JarNewActivity extends Activity {
 	    setContentView(R.layout.jar_new);
 	    
 	    jarNameEditText = (EditText) findViewById(R.id.jarNameEditText);
+	    spinner = (Spinner) findViewById(R.id.SFrecuency);
+	    checkbox = (CheckBox) findViewById(R.id.Check_weekend);
 	    
 	    ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.SFrecuency, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        
+        spinner.setOnItemSelectedListener(
+        		new OnItemSelectedListener() {
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View arg1,
+						int pos, long arg3) {
+
+					selectionFrecuency = parent.getItemAtPosition(pos).toString();
+					if (selectionFrecuency.equals("diariamente")){
+						checkbox.setVisibility(View.VISIBLE);
+					}else{
+						checkbox.setVisibility(View.INVISIBLE);
+					}
+					
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					selectionFrecuency="";
+				}
+		});
+	    
 	}
 	
 	@Override
