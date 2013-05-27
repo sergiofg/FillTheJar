@@ -82,7 +82,7 @@ public class JarPersistence {
 		values.put(NAME,jar.getName());
 		values.put(VALUE,jar.getValue());
 		values.put(CREATED, today);
-		
+		values.put(FRECUENCY,jar.getFrecuency());
 		long id = db.insert(N_TABLE, null, values);
 		jar.setID(id);
 	}
@@ -104,7 +104,7 @@ public class JarPersistence {
 	public JarList getJarList()  throws Exception {
 		JarList jarList = new JarList();
 		
-		String[] columns = new String[]{ID_ROW, NAME, VALUE};
+		String[] columns = new String[]{ID_ROW, NAME, VALUE,FRECUENCY};
 		Cursor cursor = null;
 		cursor = db.query(N_TABLE, columns, null, null, null, null, null);
 		int numRows = cursor.getCount();
@@ -114,8 +114,9 @@ public class JarPersistence {
 			long id = cursor.getLong(0);
 			String NAME = cursor.getString(1);
 			int value = cursor.getInt(2);
+			int frecuency = cursor.getInt(3);
 			
-			Jar jar = new Jar(id, NAME);
+			Jar jar = new Jar(id, NAME,frecuency);
 			jar.setValue(value);
 			
 			jarList.addJar(jar);

@@ -76,6 +76,7 @@ public class JarNewActivity extends Activity {
 	
 	@Override 	
 	public boolean onOptionsItemSelected(MenuItem item) {
+		int nfrecuency=0;
 		switch (item.getItemId()) {
 		case android.R.id.home:
 		case 0:
@@ -86,7 +87,16 @@ public class JarNewActivity extends Activity {
 		case 1:
 			try {
 				JarPersistence jarPersistence = new JarPersistence(this);
-				Jar jar = new Jar(0, jarNameEditText.getText().toString());
+				if (selectionFrecuency.equals("diariamente")){
+					nfrecuency=1;
+				}
+				if (selectionFrecuency.equals("semanalmente")){
+					nfrecuency=7;
+				}
+				if (selectionFrecuency.equals("quincenalmente")){
+					nfrecuency=15;
+				}
+				Jar jar = new Jar(0, jarNameEditText.getText().toString(),nfrecuency);
 				jarPersistence.newJar(jar);
 				jarPersistence.cleanup();
 				Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
