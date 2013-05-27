@@ -15,11 +15,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class JarNewActivity extends Activity {
+public class JarNewActivity extends Activity implements OnItemSelectedListener{
 	private EditText jarNameEditText;
 	private CheckBox checkbox;
-	private Spinner spinner;
+	private Spinner spinner_f,spinner_s;
 	private String selectionFrecuency;
+	private int streak;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -28,36 +29,22 @@ public class JarNewActivity extends Activity {
 	    setContentView(R.layout.jar_new);
 	    
 	    jarNameEditText = (EditText) findViewById(R.id.jarNameEditText);
-	    spinner = (Spinner) findViewById(R.id.SFrecuency);
+	    spinner_f = (Spinner) findViewById(R.id.SFrecuency);
 	    checkbox = (CheckBox) findViewById(R.id.Check_weekend);
+	    spinner_s= (Spinner) findViewById(R.id.SpStreak);
 	    
 	    ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.SFrecuency, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapter_s = ArrayAdapter.createFromResource(this,R.array.SpStreak, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_f.setAdapter(adapter);
+        spinner_s.setAdapter(adapter_s);
         
-        spinner.setOnItemSelectedListener(
-        		new OnItemSelectedListener() {
-				@Override
-				public void onItemSelected(AdapterView<?> parent, View arg1,
-						int pos, long arg3) {
-
-					selectionFrecuency = parent.getItemAtPosition(pos).toString();
-					if (selectionFrecuency.equals("diariamente")){
-						checkbox.setVisibility(View.VISIBLE);
-					}else{
-						checkbox.setVisibility(View.INVISIBLE);
-					}
-					
-				}
-
-				@Override
-				public void onNothingSelected(AdapterView<?> arg0) {
-					selectionFrecuency="";
-				}
-		});
+        spinner_f.setOnItemSelectedListener(this);
+        spinner_s.setOnItemSelectedListener(this);
 	    
 	}
 	
@@ -96,7 +83,7 @@ public class JarNewActivity extends Activity {
 				if (selectionFrecuency.equals("quincenalmente")){
 					nfrecuency=15;
 				}
-				Jar jar = new Jar(0, jarNameEditText.getText().toString(),nfrecuency);
+				Jar jar = new Jar(0, jarNameEditText.getText().toString(),nfrecuency,streak);
 				jarPersistence.newJar(jar);
 				jarPersistence.cleanup();
 				Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
@@ -110,5 +97,40 @@ public class JarNewActivity extends Activity {
 			return true;			
 		}
 		return false;
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View v, int pos,long arg3) {
+		Spinner sp = (Spinner)parent;
+		switch (sp.getId()) {
+		case R.id.SFrecuency :
+			selectionFrecuency = parent.getItemAtPosition(pos).toString();
+			if (selectionFrecuency.equals("diariamente")){
+				checkbox.setVisibility(View.VISIBLE);
+			}else{
+				checkbox.setVisibility(View.INVISIBLE);
+			}
+			break;
+
+		case R.id.SpStreak:
+			streak =Integer.parseInt(parent.getItemAtPosition(pos).toString());
+			break;
+		}
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+		// TODO Auto-generated method stub
+		Spinner sp = (Spinner)parent;
+		switch (sp.getId()) {
+		case R.id.SFrecuency :
+			selectionFrecuency="";
+			break;
+
+		case R.id.SpStreak:
+			streak = 1;
+			break;
+		}
+		
 	}	
 }

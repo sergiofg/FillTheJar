@@ -15,11 +15,12 @@ public class Jar  implements Serializable {
 	private int lastFill;
 	private int streak;
 
-	public Jar(long iD, String name,int frecuency) {
+	public Jar(long iD, String name,int frecuency,int streak) {
 		this.iD = iD;
 		this.name = name;
 		this.value=0;
 		this.frecuency = frecuency;
+		this.streak = streak;
 	}
 	
 	public long getID() {
