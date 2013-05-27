@@ -9,18 +9,19 @@ public class Jar  implements Serializable {
 	private int created;
 	private int value;
 	private int frecuency;
-	private boolean weekends;
+	private int weekends;
 	private int fillsPerCycle;
 	private int fillsThisCycle;
 	private int lastFill;
 	private int streak;
 
-	public Jar(long iD, String name,int frecuency,int streak) {
+	public Jar(long iD, String name,int frecuency,int streak,int weekends) {
 		this.iD = iD;
 		this.name = name;
 		this.value=0;
 		this.frecuency = frecuency;
 		this.streak = streak;
+		this.weekends = weekends;
 	}
 	
 	public long getID() {
@@ -63,11 +64,15 @@ public class Jar  implements Serializable {
 		this.frecuency = frecuency;
 	}
 	
-	public boolean isWeekends() {
+	public int isWeekends() {
 		return weekends;
 	}
-
-	public void setWeekends(boolean weekends) {
+	
+	public int getWeekends(){
+		return weekends;
+	}
+	
+	public void setWeekends(int weekends) {
 		this.weekends = weekends;
 	}
 	

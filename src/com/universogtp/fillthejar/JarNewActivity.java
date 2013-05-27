@@ -20,7 +20,7 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 	private CheckBox checkbox;
 	private Spinner spinner_f,spinner_s;
 	private String selectionFrecuency;
-	private int streak;
+	private int streak,weekend;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,10 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 				if (selectionFrecuency.equals("quincenalmente")){
 					nfrecuency=15;
 				}
-				Jar jar = new Jar(0, jarNameEditText.getText().toString(),nfrecuency,streak);
+				if (checkbox.isChecked()){
+					weekend=1;
+				}else weekend=0;
+				Jar jar = new Jar(0, jarNameEditText.getText().toString(),nfrecuency,streak,weekend);
 				jarPersistence.newJar(jar);
 				jarPersistence.cleanup();
 				Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
