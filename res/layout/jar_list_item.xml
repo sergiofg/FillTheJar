@@ -1,8 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/element_text"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/untitled"
-    android:textSize="30sp" 
-    android:drawableLeft="@drawable/ic_launcher"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <ImageView
+        android:id="@+id/element_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:padding="3dp"/>
+        
+    <TextView
+        android:id="@+id/element_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_alignParentTop="true" 
+		android:layout_toRightOf="@+id/element_image"
+        android:layout_toLeftOf="@+id/element_counter"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:padding="3dp"
+        android:textStyle="bold" />
+
+   	<TextView
+	    android:id="@+id/element_counter"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"       
+	    android:textAppearance="?android:attr/textAppearanceMedium"
+	    android:padding="3dp"
+	    android:textStyle="bold" /> 
+
+	<TextView
+        android:id="@+id/element_last_fill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_below="@+id/element_name" 
+		android:layout_toRightOf="@+id/element_image"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:padding="3dp" />
+	
+    <TextView
+        android:id="@+id/element_streak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+		android:layout_alignTop="@+id/element_last_fill"
+		android:layout_alignParentRight="true"
+		android:padding="3dp" />	
+</RelativeLayout>

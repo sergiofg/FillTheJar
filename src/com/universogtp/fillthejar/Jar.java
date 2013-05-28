@@ -125,7 +125,7 @@ public class Jar  implements Serializable {
 		
 		if (getFillsThisCycle() < getFillsPerCycle()) {
 			setValue(getValue()+1);
-			setLastFill((int)System.currentTimeMillis()/1000);
+			setLastFill((int)(System.currentTimeMillis()/1000));
 			setFillsThisCycle(getFillsThisCycle()+1);
 			setStreak(getStreak()+1);
 		} else {
@@ -138,7 +138,7 @@ public class Jar  implements Serializable {
 	public boolean refresh() {
 		boolean updated = false;
 		
-		long currentCycleStartMillis = (long) getCurrentCycleStart() * 1000;
+		long currentCycleStartMillis = (long) (getCurrentCycleStart() * 1000);
 		long todayMillis = System.currentTimeMillis();
 		
 		int daysSinceCurrentCycleStart =  (int) ((todayMillis - currentCycleStartMillis) / (1000 * 60 * 60 * 24));		

@@ -95,7 +95,7 @@ public class JarPersistence {
 	public void newJar(Jar jar) {
 		ContentValues values = getJarValues(jar);
 		
-		int today =(int) System.currentTimeMillis()/1000;		
+		int today =(int) (System.currentTimeMillis()/1000);		
 		jar.setCurrentCycleStart(today);
 
 		values.put(CREATED, today);
