@@ -89,14 +89,22 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 				Jar jar = new Jar(0, jarNameEditText.getText().toString(),nfrecuency,streak,weekend);
 				jarPersistence.newJar(jar);
 				jarPersistence.cleanup();
+
 				Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
+				
+	            intent = new Intent(this, JarActivity.class);
+	    	    intent.putExtra("jarObject", jar);
+	            startActivityForResult(intent, 0);
+	            
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-			intent = new Intent(this, JarListActivity.class);
+			/*intent = new Intent(this, JarListActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);			
+            startActivity(intent);*/
+            
+
 			return true;			
 		}
 		return false;
