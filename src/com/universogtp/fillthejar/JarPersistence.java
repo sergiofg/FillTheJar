@@ -16,16 +16,14 @@ public class JarPersistence {
 	public static final String FILLPERCYCLE = "fill_per_cycle";
 	public static final String FILLTHISCYCLE = "fill_this_cycle";
 	public static final String LASTFILL = "last_fill";
+	public static final String CURRENTCYCLESTART = "current_cycle_start";
 	public static final String STREAK = "streak";
 
 	
 	private static final String N_DB = "fill_the_jar";
 	private static final String N_TABLE = "jar";
-	private static final int VERSION_DB =4; 
-	
-	private long date = System.currentTimeMillis();
-	private int today = (int)date;
-	
+	private static final int VERSION_DB =5; 
+		
 	private DBHelper dbHelper;
 	private final Context context;
 	private SQLiteDatabase db;
@@ -42,10 +40,11 @@ public class JarPersistence {
 					+ VALUE+ " INTEGER NOT NULL, "
 					+ CREATED+" INTEGER, "
 					+ FRECUENCY+" INTEGER ,"
-					+ WEEKENDS +" INTEGER, " // VALUE 0 = FALSE, 1 = TRUE
+					+ WEEKENDS +" INTEGER, "
 					+ FILLPERCYCLE+" INTEGER, "
 					+ FILLTHISCYCLE+" INTEGER, "
 					+ LASTFILL+" INTEGER, "
+					+ CURRENTCYCLESTART+" INTEGER, "
 					+ STREAK+" INTEGER);");
 		}
 
@@ -76,27 +75,39 @@ public class JarPersistence {
 		}
 	}
 	
-	public void newJar(Jar jar) {
+	private ContentValues getJarValues(Jar jar) {
 		ContentValues values = new ContentValues();
-
+		
 		values.put(NAME,jar.getName());
-		values.put(VALUE,jar.getValue());
-		values.put(CREATED, today);
 		values.put(FRECUENCY,jar.getFrecuency());
-		values.put(STREAK, jar.getStreak());
 		values.put(WEEKENDS,jar.getWeekends());
+		values.put(FILLPERCYCLE, jar.getFillsPerCycle());
+		
+		values.put(VALUE,jar.getValue());
+		values.put(STREAK, jar.getStreak());
+		values.put(FILLTHISCYCLE, jar.getFillsThisCycle());
+		values.put(LASTFILL, jar.getLastFill());
+		values.put(CURRENTCYCLESTART, jar.getCurrentCycleStart());
+		
+		return values;
+	}
+	
+	public void newJar(Jar jar) {
+		ContentValues values = getJarValues(jar);
+		
+		int today =(int) System.currentTimeMillis()/1000;		
+		jar.setCurrentCycleStart(today);
+
+		values.put(CREATED, today);
 		
 		long id = db.insert(N_TABLE, null, values);
 		jar.setID(id);
+		jar.setCreated(today);
 	}
 	
 	public void updateJar(Jar jar){
-		ContentValues values = new ContentValues();
-
-		values.put(NAME,jar.getName());
-		values.put(VALUE,jar.getValue());
-		values.put(STREAK, jar.getStreak());
-
+		ContentValues values = getJarValues(jar);
+		
 		db.update(N_TABLE, values, ID_ROW+"='"+jar.getID()+"'", null);
 	}
 	
@@ -107,7 +118,7 @@ public class JarPersistence {
 	public JarList getJarList()  throws Exception {
 		JarList jarList = new JarList();
 		
-		String[] columns = new String[]{ID_ROW, NAME, VALUE,FRECUENCY,STREAK,WEEKENDS,LASTFILL};
+		String[] columns = new String[]{ID_ROW, NAME, VALUE,CREATED, FRECUENCY,WEEKENDS,FILLPERCYCLE, FILLTHISCYCLE, LASTFILL, CURRENTCYCLESTART, STREAK};
 		Cursor cursor = null;
 		cursor = db.query(N_TABLE, columns, null, null, null, null, null);
 		int numRows = cursor.getCount();
@@ -117,13 +128,25 @@ public class JarPersistence {
 			long id = cursor.getLong(0);
 			String NAME = cursor.getString(1);
 			int value = cursor.getInt(2);
-			int frecuency = cursor.getInt(3);
-			int streak = cursor.getInt(4);
+			int created = cursor.getInt(3);
+			int frecuency = cursor.getInt(4);
 			int weekends = cursor.getInt(5);
-			int lastfill = cursor.getInt(6);
+			int fillsPerCycle = cursor.getInt(6);
+			int fillsThisCycle = cursor.getInt(7);
+			int lastFill = cursor.getInt(8);
+			int currentCycleStart = cursor.getInt(9);
+			int streak = cursor.getInt(10);
 			
-			Jar jar = new Jar(id, NAME,frecuency,streak,weekends);
+			Jar jar = new Jar(id, NAME);			
 			jar.setValue(value);
+			jar.setCreated(created);
+			jar.setFrecuency(frecuency);
+			jar.setWeekends(weekends);
+			jar.setFillsPerCycle(fillsPerCycle);
+			jar.setFillsThisCycle(fillsThisCycle);
+			jar.setLastFill(lastFill);
+			jar.setCurrentCycleStart(currentCycleStart);
+			jar.setStreak(streak);
 			
 			jarList.addJar(jar);
 			

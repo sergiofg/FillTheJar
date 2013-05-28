@@ -14,11 +14,10 @@ public class AlarmSetter extends BroadcastReceiver {
 		    AlarmManager alarmManager=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 		    Calendar calendar=Calendar.getInstance();
 		    
-		    calendar.set(Calendar.HOUR_OF_DAY, 12);
+		    calendar.set(Calendar.HOUR_OF_DAY, 0);
 		    calendar.set(Calendar.MINUTE, 0);
 		    calendar.set(Calendar.SECOND, 0);
 		    calendar.set(Calendar.MILLISECOND, 0);
-		    calendar.set(Calendar.AM_PM, Calendar.AM);
 		    
 		    if (calendar.getTimeInMillis()<System.currentTimeMillis()) {
 		      calendar.add(Calendar.DAY_OF_YEAR, 1);

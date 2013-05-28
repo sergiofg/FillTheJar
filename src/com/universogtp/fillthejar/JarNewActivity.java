@@ -63,7 +63,7 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 	
 	@Override 	
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int nfrecuency=0;
+		int frecuency=0;
 		switch (item.getItemId()) {
 		case android.R.id.home:
 		case 0:
@@ -75,18 +75,23 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 			try {
 				JarPersistence jarPersistence = new JarPersistence(this);
 				if (selectionFrecuency.equals("diariamente")){
-					nfrecuency=1;
+					frecuency=1;
 				}
 				if (selectionFrecuency.equals("semanalmente")){
-					nfrecuency=7;
+					frecuency=7;
 				}
 				if (selectionFrecuency.equals("quincenalmente")){
-					nfrecuency=15;
+					frecuency=15;
 				}
 				if (checkbox.isChecked()){
 					weekend=1;
 				}else weekend=0;
-				Jar jar = new Jar(0, jarNameEditText.getText().toString(),nfrecuency,streak,weekend);
+				Jar jar = new Jar(0, jarNameEditText.getText().toString());
+							
+				jar.setFrecuency(frecuency);
+				jar.setWeekends(weekend);
+				jar.setFillsPerCycle(streak);
+				
 				jarPersistence.newJar(jar);
 				jarPersistence.cleanup();
 

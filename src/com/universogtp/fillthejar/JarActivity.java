@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -55,9 +56,12 @@ public class JarActivity extends Activity implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-		jar.fill();
+		String message = jar.fill();
 		if (jarPersistence != null) {
 			jarPersistence.updateJar(jar);
+		}
+		if (message != null) {
+			Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 		}
 		counter.setText(String.valueOf(jar.getValue()));
 	}	

@@ -13,15 +13,19 @@ public class Jar  implements Serializable {
 	private int fillsPerCycle;
 	private int fillsThisCycle;
 	private int lastFill;
+	private int currentCycleStart;
 	private int streak;
 
-	public Jar(long iD, String name,int frecuency,int streak,int weekends) {
+	public Jar(long iD, String name) {
 		this.iD = iD;
 		this.name = name;
 		this.value=0;
-		this.frecuency = frecuency;
-		this.streak = streak;
-		this.weekends = weekends;
+		this.frecuency = 1;
+		this.weekends=0;
+		this.fillsPerCycle=1;
+		this.fillsThisCycle=0;
+		this.lastFill=0;
+		this.streak = 0;
 	}
 	
 	public long getID() {
@@ -100,6 +104,14 @@ public class Jar  implements Serializable {
 		this.lastFill = lastFill;
 	}
 
+	public int getCurrentCycleStart() {
+		return currentCycleStart;
+	}
+
+	public void setCurrentCycleStart(int currentCycleStart) {
+		this.currentCycleStart = currentCycleStart;
+	}	
+	
 	public int getStreak() {
 		return streak;
 	}
@@ -108,14 +120,38 @@ public class Jar  implements Serializable {
 		this.streak = streak;
 	}
 
-	public int fill() {
-		// TODO calcular si debe rellenarse o no		
-		value++;
-		return value;
+	public String fill() {
+		String message = null;
+		
+		if (getFillsThisCycle() < getFillsPerCycle()) {
+			setValue(getValue()+1);
+			setLastFill((int)System.currentTimeMillis()/1000);
+			setFillsThisCycle(getFillsThisCycle()+1);
+			setStreak(getStreak()+1);
+		} else {
+			message = "No se puede rellenar hoy";
+		}
+
+		return message;
 	}
 	
 	public boolean refresh() {
-		// TODO calcular si el tarro debe vaciarse y actualiza en consecuencia (devolver true si el tarro cambia y debe ser guardado en persistencia)  
-		return false;
+		boolean updated = false;
+		
+		long currentCycleStartMillis = (long) getCurrentCycleStart() * 1000;
+		long todayMillis = System.currentTimeMillis();
+		
+		int daysSinceCurrentCycleStart =  (int) ((todayMillis - currentCycleStartMillis) / (1000 * 60 * 60 * 24));		
+		
+		if (daysSinceCurrentCycleStart >= getFrecuency()) {
+			int ellapsesCycles = daysSinceCurrentCycleStart / getFrecuency();
+			setValue(getValue()-ellapsesCycles);
+			setFillsThisCycle(0);
+			
+			setCurrentCycleStart(getCurrentCycleStart()+
+					(getFrecuency()*ellapsesCycles*(60*24*24)));
+			updated = true;
+		}
+		return updated;
 	}
 }
