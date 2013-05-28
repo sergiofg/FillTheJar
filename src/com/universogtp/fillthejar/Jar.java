@@ -2,6 +2,9 @@ package com.universogtp.fillthejar;
 
 import java.io.Serializable;
 
+import android.content.Context;
+import android.widget.Toast;
+
 public class Jar  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private long iD;
@@ -120,19 +123,15 @@ public class Jar  implements Serializable {
 		this.streak = streak;
 	}
 
-	public String fill() {
-		String message = null;
-		
+	public void fill(Context context) {	
 		if (getFillsThisCycle() < getFillsPerCycle()) {
 			setValue(getValue()+1);
 			setLastFill((int)(System.currentTimeMillis()/1000));
 			setFillsThisCycle(getFillsThisCycle()+1);
 			setStreak(getStreak()+1);
 		} else {
-			message = "No se puede rellenar hoy";
+			Toast.makeText(context, context.getString(R.string.it_can_not_be_filled_today), Toast.LENGTH_SHORT).show();
 		}
-
-		return message;
 	}
 	
 	public boolean refresh() {

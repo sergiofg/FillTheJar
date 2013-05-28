@@ -2,11 +2,12 @@
 <resources>
 
     <string name="app_name">FillTheJar</string>
-    <string name="action_settings">Settings</string>
-    <string name="untitled">Sin título</string>
+    <string name="action_settings">Preferencias</string>
     <string name="jar_list">Lista de tarros</string>
     <string name="name">Nombre</string>
     <string name="saved">guardado</string>
     <string name="fill">+</string>
-
+    <string name="filled">Rellenado</string>
+    <string name="it_can_not_be_filled_today">No se puede rellenar hoy</string>
+    <string name="streak">Racha</string>
 </resources>

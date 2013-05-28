@@ -42,10 +42,10 @@ public class JarListAdapter extends ArrayAdapter<Jar> {
 			lastFillString = DateFormat.getDateInstance().format(lastFillDate);
 		}
 		TextView txtLastFill = (TextView) rowView.findViewById(R.id.element_last_fill);		
-		txtLastFill.setText("Rellenado: "+lastFillString);
+		txtLastFill.setText(context.getString(R.string.filled)+": "+lastFillString);
 		
 		TextView txtStreak = (TextView) rowView.findViewById(R.id.element_streak);
-		txtStreak.setText("Racha: "+String.valueOf(jarList.getJar(position).getStreak()));	
+		txtStreak.setText(context.getString(R.string.streak)+": "+String.valueOf(jarList.getJar(position).getStreak()));	
 		
 		return rowView;
 	}
