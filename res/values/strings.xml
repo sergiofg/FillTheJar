@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">FillTheJar</string>
     <string name="action_settings">Preferencias</string>
+    <string name="action_about">Acerca de</string>
     <string name="jar_list">Lista de tarros</string>
     <string name="name">Nombre</string>
     <string name="saved">guardado</string>
