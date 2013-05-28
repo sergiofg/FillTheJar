@@ -1,8 +1,9 @@
 package com.universogtp.fillthejar;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class JarList {
+public class JarList implements Iterable<Jar> {
 	private ArrayList<Jar> jarArray;
 	
 	public JarList() {
@@ -33,5 +34,11 @@ public class JarList {
 	public Jar[] toArray() {
 		Jar[] jars = jarArray.toArray(new Jar[jarArray.size()]);
 		return jars;
+	}
+
+	@Override
+	public Iterator<Jar> iterator() {
+        Iterator<Jar> jarIterator = jarArray.iterator();
+        return jarIterator;
 	}
 }

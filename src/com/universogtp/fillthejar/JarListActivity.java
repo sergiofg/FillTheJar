@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ListView;
 
 public class JarListActivity extends ListActivity {
-	private JarList jarList;
+	private JarList jarList;	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,12 @@ public class JarListActivity extends ListActivity {
 		}
 	    
 	    setListAdapter(new JarListAdapter(this,jarList));
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		AlarmSetter.setAlarm(this);
 	}
 	
 	@Override
@@ -59,5 +65,4 @@ public class JarListActivity extends ListActivity {
 		}
 		return false;
 	}
-
 }
