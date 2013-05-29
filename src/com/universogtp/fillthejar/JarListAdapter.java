@@ -24,37 +24,40 @@ public class JarListAdapter extends ArrayAdapter<Jar> {
 		View rowView = inflater.inflate(R.layout.jar_list_item, parent, false);
 		
 		ImageView image = (ImageView) rowView.findViewById(R.id.element_image);
-		image.setImageResource(R.drawable.ic_launcher); 
-		
 		TextView txtName = (TextView) rowView.findViewById(R.id.element_name);
-		txtName.setText(jarList.getJar(position).getName());
-		
 		TextView txtCounter = (TextView) rowView.findViewById(R.id.element_counter);
+		TextView txtStatus = (TextView) rowView.findViewById(R.id.element_status);
+		TextView txtStreak = (TextView) rowView.findViewById(R.id.element_streak);
+		
+		image.setImageResource(R.drawable.ic_launcher); 
+		txtName.setText(jarList.getJar(position).getName());
 		txtCounter.setText(String.valueOf(jarList.getJar(position).getValue()));
 
-		String status = "";
-		switch (jarList.getJar(position).getFrecuency()) {
-		case 1:
-			status = "diario ";
-			break;
-		case 7:
-			status = "semanal ";
-			break;
-		case 15:
-			status = "quincenal ";
-			break;
-		default:
-			break;
-		};
-		status += jarList.getJar(position).getFillsThisCycle();
-		status += "/";
-		status += jarList.getJar(position).getFillsPerCycle();
-		TextView txtStatus = (TextView) rowView.findViewById(R.id.element_status);
-		txtStatus.setText(status);
+		if (jarList.getJar(position).getFrecuency() == 0) {
+			txtStatus.setText("ilimitado");
+			txtStreak.setText("");			
+		} else {
+			String status = "";
+			switch (jarList.getJar(position).getFrecuency()) {
+			case 1:
+				status = "diario ";
+				break;
+			case 7:
+				status = "semanal ";
+				break;
+			case 15:
+				status = "quincenal ";
+				break;
+			default:
+				break;
+			};
+			status += jarList.getJar(position).getFillsThisCycle();
+			status += "/";
+			status += jarList.getJar(position).getFillsPerCycle();
 		
-		TextView txtStreak = (TextView) rowView.findViewById(R.id.element_streak);
-		txtStreak.setText(context.getString(R.string.streak)+": "+String.valueOf(jarList.getJar(position).getStreak()));	
-		
+			txtStatus.setText(status);
+			txtStreak.setText(context.getString(R.string.streak)+": "+String.valueOf(jarList.getJar(position).getStreak()));	
+		}
 		return rowView;
 	}
 	

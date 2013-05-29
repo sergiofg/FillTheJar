@@ -124,7 +124,8 @@ public class Jar  implements Serializable {
 		this.streak = streak;
 	}
 
-	public void fill(Context context) {	
+	public void fill(Context context) {
+		if (getFrecuency() == 0) setValue(getValue()+1);
 		if (getFillsThisCycle() < getFillsPerCycle()) {
 			setValue(getValue()+1);
 			setLastFill((int)(System.currentTimeMillis()/1000));
@@ -137,6 +138,8 @@ public class Jar  implements Serializable {
 	
 	public boolean refresh() {
 		boolean updated = false;
+		
+		if (getFrecuency() == 0) return false;
 		
 		long currentCycleStartMillis = (long) getCurrentCycleStart() * 1000;
 		Calendar currentCycleStartCalendar = Calendar.getInstance();
@@ -158,7 +161,11 @@ public class Jar  implements Serializable {
 		
 		if (daysSinceCurrentCycleStart >= getFrecuency()) {
 			int ellapsesCycles = daysSinceCurrentCycleStart / getFrecuency();
-			if (getFillsThisCycle() == 0) {
+			if (getFillsThisCycle() == 0 &&
+					(getFrecuency() != 1 || 
+						(isWeekends() == 0 &&  
+							(todayCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||  
+							 todayCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY )))){
 				int newValue = getValue()-ellapsesCycles;
 				if (newValue < 0) newValue = 0;
 				setValue(newValue);
