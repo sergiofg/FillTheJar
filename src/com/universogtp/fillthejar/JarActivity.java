@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -14,6 +15,7 @@ import android.content.Intent;
 public class JarActivity extends Activity implements OnClickListener {
 	TextView counter;
 	Button button;
+	ImageView image;
 	Jar jar;
 	JarPersistence jarPersistence;
 	
@@ -35,11 +37,21 @@ public class JarActivity extends Activity implements OnClickListener {
 	    ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    
+	    image = (ImageView) findViewById(R.id.jar_image);
 	    counter = (TextView) findViewById(R.id.counter_text);
-	    counter.setText(String.valueOf(jar.getValue()));
-	    
 	    button = (Button) findViewById(R.id.add_button);
+	    
+	    refreshDisplay();
 	    button.setOnClickListener(this);		    
+	}
+	
+	private void refreshDisplay() {
+	    int value = jar.getValue();
+	    if (value > 10) value = 10;
+	    int jarImageID = getResources().getIdentifier("jar"+value, "drawable", "com.universogtp.fillthejar");
+	    image.setImageResource(jarImageID);
+	    
+	    counter.setText(String.valueOf(jar.getValue()));
 	}
 
 	@Override 	
@@ -60,7 +72,7 @@ public class JarActivity extends Activity implements OnClickListener {
 		if (jarPersistence != null) {
 			jarPersistence.updateJar(jar);
 		}
-		counter.setText(String.valueOf(jar.getValue()));
+		refreshDisplay();
 	}	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
