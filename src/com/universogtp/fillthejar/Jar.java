@@ -12,7 +12,7 @@ public class Jar  implements Serializable {
 	private String name;
 	private int created;
 	private int value;
-	private int frecuency;
+	private int frequency;
 	private int weekends;
 	private int fillsPerCycle;
 	private int fillsThisCycle;
@@ -24,7 +24,7 @@ public class Jar  implements Serializable {
 		this.iD = iD;
 		this.name = name;
 		this.value=0;
-		this.frecuency = 1;
+		this.frequency = 1;
 		this.weekends=0;
 		this.fillsPerCycle=1;
 		this.fillsThisCycle=0;
@@ -64,12 +64,12 @@ public class Jar  implements Serializable {
 		this.value=value;
 	}
 	
-	public int getFrecuency() {
-		return frecuency;
+	public int getFrequency() {
+		return frequency;
 	}
 
-	public void setFrecuency(int frecuency) {
-		this.frecuency = frecuency;
+	public void setFrequency(int frecuency) {
+		this.frequency = frecuency;
 	}
 	
 	public int isWeekends() {
@@ -125,7 +125,7 @@ public class Jar  implements Serializable {
 	}
 
 	public void fill(Context context) {
-		if (getFrecuency() == 0) setValue(getValue()+1);
+		if (getFrequency() == 0) setValue(getValue()+1);
 		if (getFillsThisCycle() < getFillsPerCycle()) {
 			setValue(getValue()+1);
 			setLastFill((int)(System.currentTimeMillis()/1000));
@@ -139,7 +139,7 @@ public class Jar  implements Serializable {
 	public boolean refresh() {
 		boolean updated = false;
 		
-		if (getFrecuency() == 0) return false;
+		if (getFrequency() == 0) return false;
 		
 		long currentCycleStartMillis = (long) getCurrentCycleStart() * 1000;
 		Calendar currentCycleStartCalendar = Calendar.getInstance();
@@ -159,10 +159,10 @@ public class Jar  implements Serializable {
 		
 		int daysSinceCurrentCycleStart =  (int) ((todayCalendar.getTimeInMillis() - currentCycleStartCalendar.getTimeInMillis()) / (1000 * 60 * 60 * 24));		
 		
-		if (daysSinceCurrentCycleStart >= getFrecuency()) {
-			int ellapsesCycles = daysSinceCurrentCycleStart / getFrecuency();
+		if (daysSinceCurrentCycleStart >= getFrequency()) {
+			int ellapsesCycles = daysSinceCurrentCycleStart / getFrequency();
 			if (getFillsThisCycle() == 0 &&
-					(getFrecuency() != 1 || 
+					(getFrequency() != 1 || 
 						(isWeekends() == 0 &&  
 							(todayCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||  
 							 todayCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY )))){
@@ -174,7 +174,7 @@ public class Jar  implements Serializable {
 			setFillsThisCycle(0);
 			
 			setCurrentCycleStart(getCurrentCycleStart()+
-					(getFrecuency()*ellapsesCycles*(60*24*24)));
+					(getFrequency()*ellapsesCycles*(60*24*24)));
 			updated = true;
 		}
 		

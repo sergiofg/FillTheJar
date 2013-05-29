@@ -11,7 +11,7 @@ public class JarPersistence {
 	public static final String NAME = "name";
 	public static final String VALUE = "value";
 	public static final String CREATED = "date_of_created"; // poner fecha actual
-	public static final String FRECUENCY = "frecuency";
+	public static final String FREQUENCY = "frequency";
 	public static final String WEEKENDS = "weekends";
 	public static final String FILLPERCYCLE = "fill_per_cycle";
 	public static final String FILLTHISCYCLE = "fill_this_cycle";
@@ -22,7 +22,7 @@ public class JarPersistence {
 	
 	private static final String N_DB = "fill_the_jar";
 	private static final String N_TABLE = "jar";
-	private static final int VERSION_DB =6; 
+	private static final int VERSION_DB =7; 
 		
 	private DBHelper dbHelper;
 	private final Context context;
@@ -39,7 +39,7 @@ public class JarPersistence {
 					+ NAME+" TEXT NOT NULL, "
 					+ VALUE+ " INTEGER NOT NULL, "
 					+ CREATED+" INTEGER, "
-					+ FRECUENCY+" INTEGER ,"
+					+ FREQUENCY+" INTEGER ,"
 					+ WEEKENDS +" INTEGER, "
 					+ FILLPERCYCLE+" INTEGER, "
 					+ FILLTHISCYCLE+" INTEGER, "
@@ -79,7 +79,7 @@ public class JarPersistence {
 		ContentValues values = new ContentValues();
 		
 		values.put(NAME,jar.getName());
-		values.put(FRECUENCY,jar.getFrecuency());
+		values.put(FREQUENCY,jar.getFrequency());
 		values.put(WEEKENDS,jar.getWeekends());
 		values.put(FILLPERCYCLE, jar.getFillsPerCycle());
 		
@@ -119,7 +119,7 @@ public class JarPersistence {
 	public JarList getJarList()  throws Exception {
 		JarList jarList = new JarList();
 		
-		String[] columns = new String[]{ID_ROW, NAME, VALUE,CREATED, FRECUENCY,WEEKENDS,FILLPERCYCLE, FILLTHISCYCLE, LASTFILL, CURRENTCYCLESTART, STREAK};
+		String[] columns = new String[]{ID_ROW, NAME, VALUE,CREATED, FREQUENCY,WEEKENDS,FILLPERCYCLE, FILLTHISCYCLE, LASTFILL, CURRENTCYCLESTART, STREAK};
 		Cursor cursor = null;
 		cursor = db.query(N_TABLE, columns, null, null, null, null, null);
 		int numRows = cursor.getCount();
@@ -141,7 +141,7 @@ public class JarPersistence {
 			Jar jar = new Jar(id, NAME);			
 			jar.setValue(value);
 			jar.setCreated(created);
-			jar.setFrecuency(frecuency);
+			jar.setFrequency(frecuency);
 			jar.setWeekends(weekends);
 			jar.setFillsPerCycle(fillsPerCycle);
 			jar.setFillsThisCycle(fillsThisCycle);

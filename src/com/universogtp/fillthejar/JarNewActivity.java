@@ -88,7 +88,7 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 				}else weekend=0;
 				Jar jar = new Jar(0, jarNameEditText.getText().toString());
 							
-				jar.setFrecuency(frecuency);
+				jar.setFrequency(frecuency);
 				jar.setWeekends(weekend);
 				jar.setFillsPerCycle(streak);
 				

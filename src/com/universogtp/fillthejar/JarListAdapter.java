@@ -33,12 +33,12 @@ public class JarListAdapter extends ArrayAdapter<Jar> {
 		txtName.setText(jarList.getJar(position).getName());
 		txtCounter.setText(String.valueOf(jarList.getJar(position).getValue()));
 
-		if (jarList.getJar(position).getFrecuency() == 0) {
+		if (jarList.getJar(position).getFrequency() == 0) {
 			txtStatus.setText("ilimitado");
 			txtStreak.setText("");			
 		} else {
 			String status = "";
-			switch (jarList.getJar(position).getFrecuency()) {
+			switch (jarList.getJar(position).getFrequency()) {
 			case 1:
 				status = "diario ";
 				break;
