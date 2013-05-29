@@ -13,12 +13,12 @@ public class AlarmReceiver extends BroadcastReceiver {
 	    try {
 			JarPersistence jarPersistance = new JarPersistence(context);
 			JarList jarList = jarPersistance.getJarList();
-			jarPersistance.cleanup();
 			if (jarList.refresh()) {
 				for (Jar jar : jarList) {
 				    jarPersistance.updateJar(jar);
 				}
 			}
+			jarPersistance.cleanup();			
 	        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 	        @SuppressWarnings("deprecation")
 			Notification notification =  new Notification.Builder(context)
