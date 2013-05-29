@@ -158,12 +158,16 @@ public class Jar  implements Serializable {
 		
 		if (daysSinceCurrentCycleStart >= getFrecuency()) {
 			int ellapsesCycles = daysSinceCurrentCycleStart / getFrecuency();
-			setValue(getValue()-ellapsesCycles);
+			if (getFillsThisCycle() == 0) {
+				int newValue = getValue()-ellapsesCycles;
+				if (newValue < 0) newValue = 0;
+				setValue(newValue);
+				setStreak(0);
+			}
 			setFillsThisCycle(0);
 			
 			setCurrentCycleStart(getCurrentCycleStart()+
 					(getFrecuency()*ellapsesCycles*(60*24*24)));
-			setStreak(0);
 			updated = true;
 		}
 		
