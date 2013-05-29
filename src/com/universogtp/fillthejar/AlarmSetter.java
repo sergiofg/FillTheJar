@@ -19,9 +19,6 @@ public class AlarmSetter extends BroadcastReceiver {
 		    calendar.set(Calendar.SECOND, 0);
 		    calendar.set(Calendar.MILLISECOND, 0);
 		    
-		    if (calendar.getTimeInMillis()<System.currentTimeMillis()) {
-		      calendar.add(Calendar.DAY_OF_YEAR, 1);
-		    }
 		    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
 		                      AlarmManager.INTERVAL_DAY,
 		                      getPendingIntent(context));

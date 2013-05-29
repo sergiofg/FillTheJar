@@ -22,7 +22,7 @@ public class JarPersistence {
 	
 	private static final String N_DB = "fill_the_jar";
 	private static final String N_TABLE = "jar";
-	private static final int VERSION_DB =5; 
+	private static final int VERSION_DB =6; 
 		
 	private DBHelper dbHelper;
 	private final Context context;
@@ -99,6 +99,7 @@ public class JarPersistence {
 		jar.setCurrentCycleStart(today);
 
 		values.put(CREATED, today);
+		values.put(CURRENTCYCLESTART, today);
 		
 		long id = db.insert(N_TABLE, null, values);
 		jar.setID(id);

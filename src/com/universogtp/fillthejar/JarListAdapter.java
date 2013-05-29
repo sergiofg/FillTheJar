@@ -1,8 +1,5 @@
 package com.universogtp.fillthejar;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,14 +32,25 @@ public class JarListAdapter extends ArrayAdapter<Jar> {
 		TextView txtCounter = (TextView) rowView.findViewById(R.id.element_counter);
 		txtCounter.setText(String.valueOf(jarList.getJar(position).getValue()));
 
-		String lastFillString = "";
-		long lastFillMillis = Long.valueOf(jarList.getJar(position).getLastFill())*1000;
-		if (lastFillMillis>0) {
-			Date lastFillDate = new Date(lastFillMillis);
-			lastFillString = DateFormat.getDateInstance().format(lastFillDate);
-		}
-		TextView txtLastFill = (TextView) rowView.findViewById(R.id.element_last_fill);		
-		txtLastFill.setText(context.getString(R.string.filled)+": "+lastFillString);
+		String status = "";
+		switch (jarList.getJar(position).getFrecuency()) {
+		case 1:
+			status = "diario ";
+			break;
+		case 7:
+			status = "semanal ";
+			break;
+		case 15:
+			status = "quincenal ";
+			break;
+		default:
+			break;
+		};
+		status += jarList.getJar(position).getFillsThisCycle();
+		status += "/";
+		status += jarList.getJar(position).getFillsPerCycle();
+		TextView txtStatus = (TextView) rowView.findViewById(R.id.element_status);
+		txtStatus.setText(status);
 		
 		TextView txtStreak = (TextView) rowView.findViewById(R.id.element_streak);
 		txtStreak.setText(context.getString(R.string.streak)+": "+String.valueOf(jarList.getJar(position).getStreak()));	

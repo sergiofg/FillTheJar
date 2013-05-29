@@ -1,6 +1,7 @@
 package com.universogtp.fillthejar;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -137,10 +138,23 @@ public class Jar  implements Serializable {
 	public boolean refresh() {
 		boolean updated = false;
 		
-		long currentCycleStartMillis = (long) (getCurrentCycleStart() * 1000);
-		long todayMillis = System.currentTimeMillis();
+		long currentCycleStartMillis = (long) getCurrentCycleStart() * 1000;
+		Calendar currentCycleStartCalendar = Calendar.getInstance();
+		currentCycleStartCalendar.setTimeInMillis(currentCycleStartMillis);
+		currentCycleStartCalendar.set(Calendar.HOUR_OF_DAY, 0);
+		currentCycleStartCalendar.set(Calendar.MINUTE, 0);
+		currentCycleStartCalendar.set(Calendar.SECOND, 0);
+		currentCycleStartCalendar.set(Calendar.MILLISECOND, 0);
 		
-		int daysSinceCurrentCycleStart =  (int) ((todayMillis - currentCycleStartMillis) / (1000 * 60 * 60 * 24));		
+		long todayMillis = System.currentTimeMillis();
+		Calendar todayCalendar = Calendar.getInstance();
+		todayCalendar.setTimeInMillis(todayMillis);
+		todayCalendar.set(Calendar.HOUR_OF_DAY, 0);
+		todayCalendar.set(Calendar.MINUTE, 0);
+		todayCalendar.set(Calendar.SECOND, 0);
+		todayCalendar.set(Calendar.MILLISECOND, 0);		
+		
+		int daysSinceCurrentCycleStart =  (int) ((todayCalendar.getTimeInMillis() - currentCycleStartCalendar.getTimeInMillis()) / (1000 * 60 * 60 * 24));		
 		
 		if (daysSinceCurrentCycleStart >= getFrecuency()) {
 			int ellapsesCycles = daysSinceCurrentCycleStart / getFrecuency();
@@ -149,8 +163,10 @@ public class Jar  implements Serializable {
 			
 			setCurrentCycleStart(getCurrentCycleStart()+
 					(getFrecuency()*ellapsesCycles*(60*24*24)));
+			setStreak(0);
 			updated = true;
 		}
+		
 		return updated;
 	}
 }

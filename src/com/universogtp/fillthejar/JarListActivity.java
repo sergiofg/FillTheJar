@@ -25,7 +25,6 @@ public class JarListActivity extends ListActivity {
 			e.printStackTrace();
 			jarList = new JarList();
 		}
-	    
 	    setListAdapter(new JarListAdapter(this,jarList));
 	}
 	
