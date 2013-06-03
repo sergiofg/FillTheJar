@@ -6,7 +6,7 @@
 	<TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tarea/motivacion"
+        android:hint="@string/tarea"
 	    />
     <EditText
         android:id="@+id/jarNameEditText"
@@ -19,7 +19,7 @@
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Frecuencia"
+        android:hint="@string/frecuencia"
 	    />
     <Spinner
         android:id="@+id/SFrecuency"
@@ -30,17 +30,17 @@
    		android:drawSelectorOnTop="True"
         />
 	 <CheckBox 
-         android:id="@+id/Check_weekend"
-         android:layout_width="wrap_content"
+        android:id="@+id/Check_weekend"
+        android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:text="Fines de semana"
+    	android:hint="@string/weekend"
     	android:checked="false"
          />
 	 <TextView 
         android:id="@+id/tx_streak"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Veces a rellenar por frecuencia"
+        android:hint="@string/streak2"
 	    />
 	 <Spinner
         android:id="@+id/SpStreak"

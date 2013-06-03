@@ -10,4 +10,8 @@
     <string name="filled">Rellenado</string>
     <string name="it_can_not_be_filled_today">No se puede rellenar hoy</string>
     <string name="streak">Racha</string>
+    <string name="tarea">Tarea/motivacion</string>
+    <string name="frecuencia">Frecuencia</string>
+    <string name="weekend">Fines de semana</string>
+    <string name="streak2">Veces a realizar</string>
 </resources>
