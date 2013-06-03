@@ -37,6 +37,7 @@
     	android:checked="false"
          />
 	 <TextView 
+        android:id="@+id/tx_streak"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Veces a rellenar por frecuencia"

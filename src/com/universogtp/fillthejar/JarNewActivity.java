@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
@@ -21,6 +22,7 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 	private Spinner spinner_f,spinner_s;
 	private String selectionFrecuency;
 	private int streak,weekend;
+	private TextView tx_streak;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 	    spinner_f = (Spinner) findViewById(R.id.SFrecuency);
 	    checkbox = (CheckBox) findViewById(R.id.Check_weekend);
 	    spinner_s= (Spinner) findViewById(R.id.SpStreak);
+	    tx_streak =(TextView) findViewById(R.id.tx_streak);
 	    
 	    ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
@@ -121,17 +124,24 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 		switch (sp.getId()) {
 		case R.id.SFrecuency :
 			selectionFrecuency = parent.getItemAtPosition(pos).toString();
-			if (selectionFrecuency.equals("diariamente")){
-				checkbox.setVisibility(View.VISIBLE);
-			}else{
-				checkbox.setVisibility(View.INVISIBLE);
-			}
 			break;
 
 		case R.id.SpStreak:
 			streak =Integer.parseInt(parent.getItemAtPosition(pos).toString());
 			break;
 		}
+		if (selectionFrecuency.equals("diariamente")){
+			checkbox.setVisibility(View.VISIBLE);
+		}else{
+			checkbox.setVisibility(View.INVISIBLE);
+		} 
+		if (selectionFrecuency.equals("ilimitado")){
+			tx_streak.setVisibility(View.INVISIBLE);
+			spinner_s.setVisibility(View.INVISIBLE);
+		}else{
+			tx_streak.setVisibility(View.VISIBLE);
+			spinner_s.setVisibility(View.VISIBLE);
+		} 
 	}
 
 	@Override
