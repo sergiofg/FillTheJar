@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,26 +21,31 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 	private EditText jarNameEditText;
 	private CheckBox checkbox;
 	private Spinner spinner_f,spinner_s;
-	private String selectionFrecuency;
-	private int streak,weekend;
-	private TextView tx_streak;
+	private String selectionFrequency;
+	private int fillspercycle,weekend;
+	private TextView tx_streak,txweekend;
+	private LinearLayout weekends,streaks;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	
+	    
+	    setTitle(R.string.new_jar);
 	    setContentView(R.layout.jar_new);
 	    
 	    jarNameEditText = (EditText) findViewById(R.id.jarNameEditText);
-	    spinner_f = (Spinner) findViewById(R.id.SFrecuency);
+	    spinner_f = (Spinner) findViewById(R.id.SFrequency);
 	    checkbox = (CheckBox) findViewById(R.id.Check_weekend);
 	    spinner_s= (Spinner) findViewById(R.id.SpStreak);
 	    tx_streak =(TextView) findViewById(R.id.tx_streak);
+	    txweekend =(TextView) findViewById(R.id.txweekend);
+	    weekends =(LinearLayout) findViewById(R.id.l_weekends);
+	    streaks =(LinearLayout) findViewById(R.id.l_streak);
 	    
 	    ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.SFrecuency, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.SFrequency, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> adapter_s = ArrayAdapter.createFromResource(this,R.array.SpStreak, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -77,13 +83,13 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 		case 1:
 			try {
 				JarPersistence jarPersistence = new JarPersistence(this);
-				if (selectionFrecuency.equals("diariamente")){
+				if (selectionFrequency.equals("diariamente")){
 					frecuency=1;
 				}
-				if (selectionFrecuency.equals("semanalmente")){
+				if (selectionFrequency.equals("semanalmente")){
 					frecuency=7;
 				}
-				if (selectionFrecuency.equals("quincenalmente")){
+				if (selectionFrequency.equals("quincenalmente")){
 					frecuency=15;
 				}
 				if (checkbox.isChecked()){
@@ -93,7 +99,7 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 							
 				jar.setFrequency(frecuency);
 				jar.setWeekends(weekend);
-				jar.setFillsPerCycle(streak);
+				jar.setFillsPerCycle(fillspercycle);
 				
 				jarPersistence.newJar(jar);
 				jarPersistence.cleanup();
@@ -107,11 +113,6 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			/*intent = new Intent(this, JarListActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);*/
-            
 
 			return true;			
 		}
@@ -122,25 +123,27 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 	public void onItemSelected(AdapterView<?> parent, View v, int pos,long arg3) {
 		Spinner sp = (Spinner)parent;
 		switch (sp.getId()) {
-		case R.id.SFrecuency :
-			selectionFrecuency = parent.getItemAtPosition(pos).toString();
+		case R.id.SFrequency :
+			selectionFrequency = parent.getItemAtPosition(pos).toString();
 			break;
 
 		case R.id.SpStreak:
-			streak =Integer.parseInt(parent.getItemAtPosition(pos).toString());
+			fillspercycle =Integer.parseInt(parent.getItemAtPosition(pos).toString());
 			break;
 		}
-		if (selectionFrecuency.equals("diariamente")){
-			checkbox.setVisibility(View.VISIBLE);
+		if (selectionFrequency.equals("diariamente")){
+			txweekend.setVisibility(View.VISIBLE);
+			weekends.setVisibility(View.VISIBLE);
 		}else{
-			checkbox.setVisibility(View.INVISIBLE);
+			txweekend.setVisibility(View.INVISIBLE);
+			weekends.setVisibility(View.INVISIBLE);
 		} 
-		if (selectionFrecuency.equals("ilimitado")){
+		if (selectionFrequency.equals("ilimitado")){
 			tx_streak.setVisibility(View.INVISIBLE);
-			spinner_s.setVisibility(View.INVISIBLE);
+			streaks.setVisibility(View.INVISIBLE);
 		}else{
 			tx_streak.setVisibility(View.VISIBLE);
-			spinner_s.setVisibility(View.VISIBLE);
+			streaks.setVisibility(View.VISIBLE);
 		} 
 	}
 
@@ -149,12 +152,12 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 		// TODO Auto-generated method stub
 		Spinner sp = (Spinner)parent;
 		switch (sp.getId()) {
-		case R.id.SFrecuency :
-			selectionFrecuency="";
+		case R.id.SFrequency :
+			selectionFrequency="";
 			break;
 
 		case R.id.SpStreak:
-			streak = 1;
+			fillspercycle = 1;
 			break;
 		}
 		

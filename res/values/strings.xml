@@ -14,4 +14,8 @@
     <string name="frecuencia">Frecuencia</string>
     <string name="weekend">Fines de semana</string>
     <string name="streak2">Veces a realizar</string>
+    <string name="new_jar">Nuevo</string>
+    <string name="dsc_frec">Cada cuanto tiempo se eliminará una moneda del si no se ha llenado al menos una vez</string>
+    <string name="dsc_weekend">Marcar si los fines de semana se tendrán en cuenta para eliminar las monedas</string>
+    <string name="dsc_streak">El máximo número de veces que se puede rellenar el tarro por cada ciclo de frecuencia</string>
 </resources>
