@@ -2,12 +2,15 @@ package com.universogtp.fillthejar;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -45,6 +48,20 @@ public class JarActivity extends Activity implements OnClickListener {
 	    button.setOnClickListener(this);		    
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuItem menuModifyJar = menu.add(0,0,0,"Modificar");
+		menuModifyJar.setIcon(R.drawable.content_edit);
+		menuModifyJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);	
+		
+		MenuItem menuDelJar = menu.add(0,1,1,"Borrar");
+		menuDelJar.setIcon(R.drawable.content_discard);
+		menuDelJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		//getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	
 	private void refreshDisplay() {
 	    int value = jar.getValue();
 	    if (value > 10) value = 10;
@@ -59,6 +76,15 @@ public class JarActivity extends Activity implements OnClickListener {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intent = new Intent(this, JarListActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);			
+			return true;
+		case 0:
+			Toast.makeText(this,"modificar", Toast.LENGTH_SHORT).show();
+			return true;
+		case 1:
+			jarPersistence.deleteJar(jar);
+			intent = new Intent(this, JarListActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);			
 			return true;
