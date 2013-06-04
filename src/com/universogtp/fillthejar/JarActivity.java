@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 public class JarActivity extends Activity implements OnClickListener {
@@ -80,13 +82,28 @@ public class JarActivity extends Activity implements OnClickListener {
             startActivity(intent);			
 			return true;
 		case 0:
-			Toast.makeText(this,"modificar", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this,R.string.modify, Toast.LENGTH_SHORT).show();
 			return true;
 		case 1:
-			jarPersistence.deleteJar(jar);
-			intent = new Intent(this, JarListActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);			
+			AlertDialog.Builder adb = new AlertDialog.Builder(this);
+            adb.setMessage(R.string.confirmation);
+            adb.setCancelable(false);
+            adb.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { 
+               
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                	borrar();
+                    finish();
+                }
+            });
+            adb.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+               
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                    dialog.cancel();
+                }
+            });
+            adb.show();	
 			return true;
 		}
 		return false;
@@ -110,4 +127,11 @@ public class JarActivity extends Activity implements OnClickListener {
 
 	    return super.onKeyDown(keyCode, event);
 	}
+    public void borrar(){
+		jarPersistence.deleteJar(jar);
+		Toast.makeText(this,R.string.delete, Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(this, JarListActivity.class);
+	    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    startActivity(intent);
+    }	
 }
