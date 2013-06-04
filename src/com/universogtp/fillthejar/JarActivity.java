@@ -86,7 +86,7 @@ public class JarActivity extends Activity implements OnClickListener {
 			return true;
 		case 1:
 			AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setMessage(R.string.confirmation);
+            adb.setMessage(R.string.confirmation_del);
             adb.setCancelable(false);
             adb.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { 
                

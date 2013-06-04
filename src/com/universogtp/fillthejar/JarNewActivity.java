@@ -97,7 +97,7 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 				}else weekend=0;
 				
 				if (jarNameEditText.getText().toString().isEmpty()){
-					Toast.makeText(this, "introduzca un nombre", Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, R.string.confirmation_add, Toast.LENGTH_SHORT).show();
 				}else
 				{				
 					Jar jar = new Jar(0, jarNameEditText.getText().toString());

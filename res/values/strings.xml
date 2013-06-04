@@ -20,7 +20,8 @@
     <string name="dsc_streak">El máximo número de veces que se puede rellenar el tarro por cada ciclo de frecuencia</string>
     <string name="delete">borrado</string>
     <string name="modify">modificado</string>
-    <string name="confirmation">¿Seguro que desea eliminar?</string>
+    <string name="confirmation_del">¿Seguro que desea eliminar?</string>
+    <string name="confirmation_add">Introduzca un nombre</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
 </resources>
