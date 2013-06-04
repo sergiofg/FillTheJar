@@ -95,20 +95,26 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 				if (checkbox.isChecked()){
 					weekend=1;
 				}else weekend=0;
-				Jar jar = new Jar(0, jarNameEditText.getText().toString());
-							
-				jar.setFrequency(frecuency);
-				jar.setWeekends(weekend);
-				jar.setFillsPerCycle(fillspercycle);
 				
-				jarPersistence.newJar(jar);
-				jarPersistence.cleanup();
-
-				Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
-				
-	            intent = new Intent(this, JarActivity.class);
-	    	    intent.putExtra("jarObject", jar);
-	            startActivityForResult(intent, 0);
+				if (jarNameEditText.getText().toString().isEmpty()){
+					Toast.makeText(this, "introduzca un nombre", Toast.LENGTH_SHORT).show();
+				}else
+				{				
+					Jar jar = new Jar(0, jarNameEditText.getText().toString());
+								
+					jar.setFrequency(frecuency);
+					jar.setWeekends(weekend);
+					jar.setFillsPerCycle(fillspercycle);
+					
+					jarPersistence.newJar(jar);
+					jarPersistence.cleanup();
+	
+					Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
+					
+		            intent = new Intent(this, JarActivity.class);
+		    	    intent.putExtra("jarObject", jar);
+		            startActivityForResult(intent, 0);
+				}
 	            
 			} catch (Exception e) {
 				e.printStackTrace();
