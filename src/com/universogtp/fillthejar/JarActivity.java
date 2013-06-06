@@ -52,11 +52,15 @@ public class JarActivity extends Activity implements OnClickListener {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem menuModifyJar = menu.add(0,0,0,"Modificar");
+		MenuItem menuModifyJar = menu.add(0,0,0,R.string.change);
 		menuModifyJar.setIcon(R.drawable.content_edit);
-		menuModifyJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);	
+		menuModifyJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
-		MenuItem menuDelJar = menu.add(0,1,1,"Borrar");
+		MenuItem menuEmptyJar = menu.add(0,1,1,R.string.empty);
+		menuEmptyJar.setIcon(R.drawable.rating_bad);
+		menuEmptyJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);	
+		
+		MenuItem menuDelJar = menu.add(0,2,2,R.string.erased);
 		menuDelJar.setIcon(R.drawable.content_discard);
 		menuDelJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		//getMenuInflater().inflate(R.menu.main, menu);
@@ -88,6 +92,16 @@ public class JarActivity extends Activity implements OnClickListener {
             startActivityForResult(intent, 0);
 			return true;
 		case 1:
+			int cycle;
+			cycle = jar.getFillsPerCycle();
+			jar = new Jar(jar.getID(), jar.getName());
+			jar.setFillsPerCycle(cycle);
+			if (jarPersistence != null) {
+				jarPersistence.updateJar(jar);
+			}
+			refreshDisplay();
+			return true;
+		case 2:
 			AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setMessage(R.string.confirmation_del);
             adb.setCancelable(false);
