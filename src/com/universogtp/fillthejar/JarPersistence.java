@@ -107,8 +107,18 @@ public class JarPersistence {
 	}
 	
 	public void updateJar(Jar jar){
-		ContentValues values = getJarValues(jar);
+		ContentValues values = new ContentValues();
 		
+		values.put(NAME,jar.getName());
+		values.put(FREQUENCY,jar.getFrequency());
+		values.put(WEEKENDS,jar.getWeekends());
+		values.put(FILLPERCYCLE, jar.getFillsPerCycle());
+		values.put(FILLTHISCYCLE, jar.getFillsThisCycle());
+		
+		if (jar.getFillsPerCycle()<jar.getValue()){
+			values.put(VALUE, jar.getFillsPerCycle());
+		}
+		//ContentValues values = getJarValues(jar);
 		db.update(N_TABLE, values, ID_ROW+"='"+jar.getID()+"'", null);
 	}
 	

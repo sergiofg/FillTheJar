@@ -22,7 +22,7 @@ public class JarUpdateActivity extends Activity implements OnItemSelectedListene
 	private CheckBox checkbox;
 	private Spinner spinner_f,spinner_s;
 	private String selectionFrequency;
-	private int fillspercycle,weekend,value;
+	private int fillspercycle,weekend,value,cycle;
 	private TextView tx_streak,txweekend;
 	private LinearLayout weekends,streaks;
 	Jar jar;
@@ -84,7 +84,7 @@ public class JarUpdateActivity extends Activity implements OnItemSelectedListene
         	{
         	checkbox.setChecked(true) ;
         	}else checkbox.setChecked(false) ;
-        value = jar.getValue();
+       
 	    
 	}
 	
@@ -136,11 +136,18 @@ public class JarUpdateActivity extends Activity implements OnItemSelectedListene
 					Toast.makeText(this, R.string.confirmation_add, Toast.LENGTH_SHORT).show();
 				}else
 				{				
+			        if (fillspercycle >= jar.getValue()){
+			            value = jar.getValue();
+			            }else value=fillspercycle;
+			        
+			        cycle = jar.getFillsThisCycle();
+					
 					jar = new Jar(jar.getID(), jarNameEditText.getText().toString());
 								
 					jar.setFrequency(frecuency);
 					jar.setWeekends(weekend);
 					jar.setFillsPerCycle(fillspercycle);
+					jar.setFillsThisCycle(cycle);
 					jar.setValue(value);
 					
 					jarPersistence.updateJar(jar);
