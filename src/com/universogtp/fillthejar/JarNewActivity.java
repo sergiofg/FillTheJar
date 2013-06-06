@@ -1,5 +1,7 @@
 package com.universogtp.fillthejar;
 
+
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -59,11 +61,11 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem menuRemoveJar = menu.add(0,0,0,"Cancelar");
+		MenuItem menuRemoveJar = menu.add(0,0,0,R.string.cancel);
 		menuRemoveJar.setIcon(R.drawable.content_remove);
 		menuRemoveJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);	
 		
-		MenuItem menuSaveJar = menu.add(0,1,1,"Grabar");
+		MenuItem menuSaveJar = menu.add(0,1,1,R.string.record);
 		menuSaveJar.setIcon(R.drawable.content_save);
 		menuSaveJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -91,6 +93,9 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 				}
 				if (selectionFrequency.equals("quincenalmente")){
 					frecuency=15;
+				}
+				if (selectionFrequency.equals("ilimitado")){
+					frecuency=0;
 				}
 				if (checkbox.isChecked()){
 					weekend=1;

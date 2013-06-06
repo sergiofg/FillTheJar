@@ -82,7 +82,10 @@ public class JarActivity extends Activity implements OnClickListener {
             startActivity(intent);			
 			return true;
 		case 0:
-			Toast.makeText(this,R.string.modify, Toast.LENGTH_SHORT).show();
+			intent = new Intent(this, JarUpdateActivity.class);
+		    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    	    intent.putExtra("jarObject", jar);
+            startActivityForResult(intent, 0);
 			return true;
 		case 1:
 			AlertDialog.Builder adb = new AlertDialog.Builder(this);

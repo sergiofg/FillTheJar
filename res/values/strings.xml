@@ -19,9 +19,13 @@
     <string name="dsc_weekend">Marcar si los fines de semana se tendrán en cuenta para eliminar las monedas</string>
     <string name="dsc_streak">El máximo número de veces que se puede rellenar el tarro por cada ciclo de frecuencia</string>
     <string name="delete">borrado</string>
-    <string name="modify">modificado</string>
+    <string name="modify">Modificado</string>
     <string name="confirmation_del">¿Seguro que desea eliminar?</string>
     <string name="confirmation_add">Introduzca un nombre</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <string name="edition">Edicion</string>
+    <string name="cancel">Cancelar</string>
+    <string name="record">Grabar</string>
+    <string name="change">Modificar</string>
 </resources>
