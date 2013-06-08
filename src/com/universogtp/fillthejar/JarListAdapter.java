@@ -29,7 +29,7 @@ public class JarListAdapter extends ArrayAdapter<Jar> {
 		TextView txtStatus = (TextView) rowView.findViewById(R.id.element_status);
 		TextView txtStreak = (TextView) rowView.findViewById(R.id.element_streak);
 		
-		image.setImageResource(R.drawable.ic_launcher); 
+		image.setImageResource(R.drawable.jar_icon_b); 
 		txtName.setText(jarList.getJar(position).getName());
 		txtCounter.setText(String.valueOf(jarList.getJar(position).getValue()));
 
