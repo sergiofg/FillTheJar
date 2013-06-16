@@ -90,11 +90,11 @@ public class JarUpdateActivity extends Activity implements OnItemSelectedListene
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem menuSaveJar = menu.add(0,0,0,R.string.change);
-		menuSaveJar.setIcon(R.drawable.content_edit);
+		MenuItem menuSaveJar = menu.add(0,1,1,R.string.change);
+		menuSaveJar.setIcon(R.drawable.content_save);
 		menuSaveJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
-		MenuItem menuRemoveJar = menu.add(0,1,1,R.string.cancel);
+		MenuItem menuRemoveJar = menu.add(0,0,0,R.string.cancel);
 		menuRemoveJar.setIcon(R.drawable.content_remove);
 		menuRemoveJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);	
 		
@@ -108,12 +108,12 @@ public class JarUpdateActivity extends Activity implements OnItemSelectedListene
 		int frecuency=0;
 		switch (item.getItemId()) {
 		case android.R.id.home:
-		case 1:
+		case 0:
 			  Intent intent = new Intent(this, JarActivity.class);
 	    	  intent.putExtra("jarObject", jar);
 	          startActivityForResult(intent, 0);		
 			return true;
-		case 0:
+		case 1:
 			try {
 				JarPersistence jarPersistence = new JarPersistence(this);
 				if (selectionFrequency.equals("diariamente")){
