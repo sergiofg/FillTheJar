@@ -136,9 +136,9 @@ public class JarUpdateActivity extends Activity implements OnItemSelectedListene
 					Toast.makeText(this, R.string.confirmation_add, Toast.LENGTH_SHORT).show();
 				}else
 				{				
-			        if (fillspercycle >= jar.getValue()){
+			     //   if (fillspercycle >= jar.getValue()){
 			            value = jar.getValue();
-			            }else value=fillspercycle;
+			       //     }else value=fillspercycle;
 			        
 			        cycle = jar.getFillsThisCycle();
 					

@@ -115,9 +115,9 @@ public class JarPersistence {
 		values.put(FILLPERCYCLE, jar.getFillsPerCycle());
 		values.put(FILLTHISCYCLE, jar.getFillsThisCycle());
 		
-		if (jar.getFillsPerCycle()<jar.getValue()){
+	/*	if (jar.getFillsPerCycle()<jar.getValue()){
 			values.put(VALUE, jar.getFillsPerCycle());
-		}
+		}*/
 		//ContentValues values = getJarValues(jar);
 		db.update(N_TABLE, values, ID_ROW+"='"+jar.getID()+"'", null);
 	}
