@@ -22,12 +22,6 @@
         android:hint="@string/frecuencia"
 	    />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/dsc_frec"
-        android:textSize="8sp" />
-
     <Spinner
         android:id="@+id/SFrequency"
     	android:layout_width="fill_parent"
@@ -36,6 +30,11 @@
    		android:prompt="@string/frequency_prompt"
    		android:drawSelectorOnTop="True"
         />
+   	 <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/dsc_frec"
+        android:textSize="8sp" />
     <LinearLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
