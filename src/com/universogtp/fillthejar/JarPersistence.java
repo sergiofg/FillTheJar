@@ -84,7 +84,7 @@ public class JarPersistence {
 		values.put(FILLPERCYCLE, jar.getFillsPerCycle());
 		
 		values.put(VALUE,jar.getValue());
-		values.put(STREAK, jar.getStreak());
+		values.put(STREAK, jar.getStreak()+jar.getValue());
 		values.put(FILLTHISCYCLE, jar.getFillsThisCycle());
 		values.put(LASTFILL, jar.getLastFill());
 		values.put(CURRENTCYCLESTART, jar.getCurrentCycleStart());
@@ -114,6 +114,8 @@ public class JarPersistence {
 		values.put(WEEKENDS,jar.getWeekends());
 		values.put(FILLPERCYCLE, jar.getFillsPerCycle());
 		values.put(FILLTHISCYCLE, jar.getFillsThisCycle());
+		values.put(VALUE, jar.getValue());
+		values.put(STREAK, jar.getStreak()+jar.getValue());
 		
 	/*	if (jar.getFillsPerCycle()<jar.getValue()){
 			values.put(VALUE, jar.getFillsPerCycle());
