@@ -50,4 +50,8 @@
 		android:layout_alignTop="@+id/element_status"
 		android:layout_alignParentRight="true"
 		android:padding="3dp" />	
+	<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/darker_gray"/>
 </RelativeLayout>

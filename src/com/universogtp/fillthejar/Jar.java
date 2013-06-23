@@ -71,8 +71,8 @@ public class Jar  implements Serializable, OnLoadCompleteListener {
 		return frequency;
 	}
 
-	public void setFrequency(int frecuency) {
-		this.frequency = frecuency;
+	public void setFrequency(int frequency) {
+		this.frequency = frequency;
 	}
 	
 	public int isWeekends() {
