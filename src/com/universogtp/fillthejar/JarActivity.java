@@ -64,6 +64,8 @@ public class JarActivity extends Activity implements OnClickListener {
 		MenuItem menuModifyJar = menu.add(0,2,2,R.string.change);
 		menuModifyJar.setIcon(R.drawable.content_edit);
 		menuModifyJar.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		
+		getMenuInflater().inflate(R.menu.main, menu);
 
 		return true;
 	}
@@ -86,7 +88,23 @@ public class JarActivity extends Activity implements OnClickListener {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);			
 			return true;
+		case R.id.action_about:
 
+			AlertDialog.Builder adb1 = new AlertDialog.Builder(this,1);
+			adb1.setIcon(R.drawable.action_about_w);
+			adb1.setTitle(R.string.about_us);
+            adb1.setMessage(R.string.about_us_text);
+            adb1.setCancelable(false);
+
+            adb1.setNeutralButton("ok", new DialogInterface.OnClickListener() { 
+                
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                	dialog.cancel();
+                }
+            });
+            adb1.show();	
+            return true;
 		case 0:
 			AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setMessage(R.string.confirmation_del);

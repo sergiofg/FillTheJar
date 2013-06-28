@@ -4,6 +4,8 @@ package com.universogtp.fillthejar;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -77,6 +79,23 @@ public class JarNewActivity extends Activity implements OnItemSelectedListener{
 		int frequency=0;
 		switch (item.getItemId()) {
 		case android.R.id.home:
+		case R.id.action_about:
+
+			AlertDialog.Builder adb = new AlertDialog.Builder(this,1);
+			adb.setIcon(R.drawable.action_about_w);
+			adb.setTitle(R.string.about_us);
+            adb.setMessage(R.string.about_us_text);
+            adb.setCancelable(false);
+
+            adb.setNeutralButton("ok", new DialogInterface.OnClickListener() { 
+                
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                	dialog.cancel();
+                }
+            });
+            adb.show();	
+            return true;
 		case 0:
 			Intent intent = new Intent(this, JarListActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

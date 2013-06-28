@@ -3,6 +3,8 @@
     <string name="app_name">FillTheJar</string>
     <string name="action_settings">Preferencias</string>
     <string name="action_about">Acerca de</string>
+    <string name="about_us">About us</string>
+    <string name="about_us_text"><b>Desarrolladores:</b>\n Sergio Fernández\n Jorge León\n Gonzalo Gómez\n<b>Diseño icono:</b>\n Miguel Magaz</string>
     <string name="jar_list">Lista de tarros</string>
     <string name="name">Nombre</string>
     <string name="saved">guardado</string>
