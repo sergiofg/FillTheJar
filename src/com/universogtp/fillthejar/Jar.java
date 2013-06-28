@@ -3,13 +3,15 @@ package com.universogtp.fillthejar;
 import java.io.Serializable;
 import java.util.Calendar;
 
+
 import android.content.Context;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.widget.Toast;
 
-public class Jar  implements Serializable, OnLoadCompleteListener {
+public class Jar  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private long iD;
 	private String name;
@@ -22,6 +24,7 @@ public class Jar  implements Serializable, OnLoadCompleteListener {
 	private int lastFill;
 	private int currentCycleStart;
 	private int streak;
+	private MediaPlayer mp;
 
 	public Jar(long iD, String name) {
 		this.iD = iD;
@@ -127,8 +130,8 @@ public class Jar  implements Serializable, OnLoadCompleteListener {
 		this.streak = streak;
 	}
 
-	private void playSound(Context context) {
-		SoundPool soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+/*	private void playSound(Context context) {
+		SoundPool soundPool = new SoundPool(20, AudioManager.STREAM_MUSIC, 0);
 		soundPool.load(context, R.raw.coin_to_empty, 1);
 		
 		soundPool.setOnLoadCompleteListener(this);
@@ -137,12 +140,20 @@ public class Jar  implements Serializable, OnLoadCompleteListener {
 	@Override
 	public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
 		soundPool.play(sampleId, 1.0f, 1.0f, 0, 0, 1.0f);
-	}	
-	
+	}	*/
+	private void play_mp(Context context){
+		mp = MediaPlayer.create(context,R.raw.coin_to_empty );
+		mp.start();
+	}
+	private void stop_mp(){
+		mp.stop();
+		
+	}
 	public void fill(Context context) {
 		if (getFrequency() == 0) {
 			setValue(getValue()+1);
-			playSound(context);
+			//playSound(context);
+			play_mp(context);
 			return;
 		}
 		if ((getFillsThisCycle() < getFillsPerCycle()) || getFillsPerCycle() == 0) {
@@ -150,7 +161,8 @@ public class Jar  implements Serializable, OnLoadCompleteListener {
 			setLastFill((int)(System.currentTimeMillis()/1000));
 			setFillsThisCycle(getFillsThisCycle()+1);
 			setStreak(getStreak()+1);
-			playSound(context);
+			//playSound(context);
+			play_mp(context);
 		} else {
 			Toast.makeText(context, context.getString(R.string.it_can_not_be_filled_today), Toast.LENGTH_SHORT).show();
 		}
