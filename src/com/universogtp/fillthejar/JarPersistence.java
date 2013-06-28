@@ -115,7 +115,7 @@ public class JarPersistence {
 		values.put(FILLPERCYCLE, jar.getFillsPerCycle());
 		values.put(FILLTHISCYCLE, jar.getFillsThisCycle());
 		values.put(VALUE, jar.getValue());
-		values.put(STREAK, jar.getStreak()+jar.getValue());
+		values.put(STREAK, jar.getStreak());
 		
 	/*	if (jar.getFillsPerCycle()<jar.getValue()){
 			values.put(VALUE, jar.getFillsPerCycle());
