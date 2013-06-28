@@ -38,7 +38,9 @@ public class JarListAdapter extends ArrayAdapter<Jar> {
 			txtStreak.setText("");			
 		} else {
 			String status = "";
-			switch (jarList.getJar(position).getFrequency()) {
+			Frequency F = new Frequency();
+			status = F.ConvertFrequency(jarList.getJar(position).getFrequency());
+			/*switch (jarList.getJar(position).getFrequency()) {
 			case 1:
 				status = "diario ";
 				break;
@@ -50,7 +52,7 @@ public class JarListAdapter extends ArrayAdapter<Jar> {
 				break;
 			default:
 				break;
-			};
+			};*/
 			status += jarList.getJar(position).getFillsThisCycle();
 			status += "/";
 			status += jarList.getJar(position).getFillsPerCycle();

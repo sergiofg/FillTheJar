@@ -18,4 +18,21 @@ public class Frequency {
 		}
 		return i;
 	}
+	public String ConvertFrequency(int i){
+		String status="";
+		switch (i) {
+		case 1:
+			status = "diario ";
+			break;
+		case 7:
+			status = "semanal ";
+			break;
+		case 15:
+			status = "quincenal ";
+			break;
+		default:
+			break;
+		};
+		return status;
+	}
 }
