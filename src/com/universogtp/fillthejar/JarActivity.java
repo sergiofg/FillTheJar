@@ -96,7 +96,7 @@ public class JarActivity extends Activity implements OnClickListener {
             adb1.setMessage(R.string.about_us_text);
             adb1.setCancelable(false);
 
-            adb1.setNeutralButton("ok", new DialogInterface.OnClickListener() { 
+            adb1.setNeutralButton("OK", new DialogInterface.OnClickListener() { 
                 
                 public void onClick(DialogInterface dialog, int which) {
                     // TODO Auto-generated method stub

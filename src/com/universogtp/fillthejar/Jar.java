@@ -130,17 +130,6 @@ public class Jar  implements Serializable {
 		this.streak = streak;
 	}
 
-/*	private void playSound(Context context) {
-		SoundPool soundPool = new SoundPool(20, AudioManager.STREAM_MUSIC, 0);
-		soundPool.load(context, R.raw.coin_to_empty, 1);
-		
-		soundPool.setOnLoadCompleteListener(this);
-	}
-	
-	@Override
-	public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-		soundPool.play(sampleId, 1.0f, 1.0f, 0, 0, 1.0f);
-	}	*/
 	private void play_mp(Context context){
 		mp = MediaPlayer.create(context,R.raw.coin_to_empty );
 		mp.start();
@@ -152,7 +141,6 @@ public class Jar  implements Serializable {
 	public void fill(Context context) {
 		if (getFrequency() == 0) {
 			setValue(getValue()+1);
-			//playSound(context);
 			play_mp(context);
 			return;
 		}
@@ -161,7 +149,6 @@ public class Jar  implements Serializable {
 			setLastFill((int)(System.currentTimeMillis()/1000));
 			setFillsThisCycle(getFillsThisCycle()+1);
 			setStreak(getStreak()+1);
-			//playSound(context);
 			play_mp(context);
 		} else {
 			Toast.makeText(context, context.getString(R.string.it_can_not_be_filled_today), Toast.LENGTH_SHORT).show();
