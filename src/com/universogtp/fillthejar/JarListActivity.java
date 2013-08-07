@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,10 @@ public class JarListActivity extends ListActivity {
 	    super.onCreate(savedInstanceState);
 	    
 	    setTitle(R.string.jar_list);
+	    
+	    ListView lv = getListView();
+	    lv.setDividerHeight(0);
+	    lv.setBackgroundColor(Color.CYAN);
 	    
 	    try {
 			JarPersistence jarPersistance = new JarPersistence(this);
